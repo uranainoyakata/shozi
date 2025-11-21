@@ -10,11 +10,11 @@
             theme: {
                 extend: {
                     colors: {
-                        'sumi': '#1a1a1a',       /* 墨色：より濃い黒にして視認性アップ */
-                        'sumi-light': '#404040', /* 薄墨：少し濃くして読みやすく */
-                        'washi': '#f7f6f0',      /* 和紙：生成り色 */
-                        'shinku': '#c71f1f',     /* 真紅：鮮やかに */
-                        'gold-leaf': '#b8860b',  /* 金箔：視認性の高い暗めの金 */
+                        'sumi': '#1a1a1a',
+                        'sumi-light': '#404040',
+                        'washi': '#f7f6f0',
+                        'shinku': '#c71f1f',
+                        'gold-leaf': '#b8860b',
                     },
                     fontFamily: {
                         serif: ['"Shippori Mincho"', 'serif'],
@@ -65,10 +65,9 @@
             background-color: #f7f6f0;
             color: #1a1a1a;
             overflow-x: hidden;
-            line-height: 1.8; /* 行間を少し広げて読みやすく */
+            line-height: 1.8;
         }
 
-        /* 縦書きユーティリティ */
         .writing-vertical {
             writing-mode: vertical-rl;
             text-orientation: upright;
@@ -76,7 +75,6 @@
             line-height: 2.0;
         }
 
-        /* 落款（ハンコ）風スタイル */
         .hanko {
             border: 3px solid #c71f1f;
             color: #c71f1f;
@@ -86,14 +84,13 @@
             transform: rotate(-2deg);
         }
 
-        /* 完売の赤斜線スタンプ - より太く */
         .sold-out-stamp {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) rotate(-15deg);
             border: 4px double #c71f1f;
-            color: #c71f1f;
+            color: #c71f1f; /* ここで赤を指定していますが、親のgrayscaleに消されていました */
             font-family: 'Kaisei Tokumin', serif;
             font-weight: 800;
             padding: 1rem 2rem;
@@ -106,7 +103,6 @@
             white-space: nowrap;
         }
 
-        /* カスタムスクロールバー非表示 */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -122,7 +118,6 @@
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
 
-        // アイコンサイズを少し大きく
         const Icons = {
             Sparkles: ({ className }) => (
                 <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -154,29 +149,24 @@
             return (
                 <div className="bg-washi bg-washi-texture min-h-screen w-full max-w-md mx-auto shadow-2xl relative overflow-hidden text-sumi selection:bg-sumi selection:text-washi">
                     
-                    {/* 背景装飾：薄墨の滲み */}
                     <div className="absolute top-[-100px] left-[-100px] w-[300px] h-[300px] bg-gray-300 rounded-full mix-blend-multiply filter blur-[80px] opacity-30 animate-float-gentle pointer-events-none"></div>
                     <div className="absolute bottom-[-50px] right-[-50px] w-[250px] h-[250px] bg-gray-200 rounded-full mix-blend-multiply filter blur-[60px] opacity-40 animate-float-gentle pointer-events-none" style={{animationDelay: '2s'}}></div>
 
-                    {/* ヘッダー：文字を大きく */}
                     <header className="pt-24 pb-12 px-6 relative z-10">
                         <div className={`transition-all duration-1000 ease-out transform ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
                             <div className="flex justify-between items-start h-60">
-                                {/* 左側：キャッチコピー（縦書き・サイズアップ） */}
                                 <div className="h-full py-2">
                                     <p className="writing-vertical text-lg font-medium text-sumi-light tracking-widest h-full border-l-2 border-sumi-light/30 pl-5 leading-loose">
                                         あなたと私を繋ぐ
                                     </p>
                                 </div>
 
-                                {/* 右側：タイトルと印（縦書き・特大サイズ） */}
                                 <div className="flex flex-row-reverse items-start gap-5">
                                     <h1 className="writing-vertical text-4xl md:text-5xl font-bold font-calligraphy tracking-widest leading-relaxed text-sumi drop-shadow-sm">
                                         しょうじの<br/>
                                         <span className="mt-6 inline-block">限定サイト</span>
                                     </h1>
                                     
-                                    {/* 落款風「開運満開」 */}
                                     <div className="hanko writing-vertical text-base font-extrabold p-2 mt-3 bg-white/60 backdrop-blur-sm shadow-md">
                                         開運<br/>満開
                                     </div>
@@ -185,10 +175,8 @@
                         </div>
                     </header>
 
-                    {/* プロフィール：文字サイズとコントラスト強化 */}
                     <section className="px-5 mb-16 relative z-10">
                         <div className={`relative bg-white/70 backdrop-blur-md p-8 shadow-[0_8px_30px_rgba(0,0,0,0.05)] border-2 border-white transition-all duration-1000 delay-200 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-                            {/* 四隅の装飾（太く） */}
                             <div className="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 border-sumi/30"></div>
                             <div className="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 border-sumi/30"></div>
                             <div className="absolute bottom-3 left-3 w-4 h-4 border-b-2 border-l-2 border-sumi/30"></div>
@@ -228,7 +216,6 @@
                         </div>
                     </section>
 
-                    {/* 商品リスト */}
                     <section className="px-4 pb-24 space-y-12 relative z-10">
                         <div className={`text-center mb-10 transition-all duration-1000 delay-300 ${loaded ? 'opacity-100' : 'opacity-0'}`}>
                             <h3 className="inline-block text-2xl font-bold font-calligraphy border-b-2 border-sumi/40 pb-3 px-10 tracking-widest">
@@ -241,11 +228,10 @@
 
                         {/* 松：フルセット（完売） */}
                         <div className={`transition-all duration-1000 delay-400 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
-                            <div className="relative bg-white p-1 shadow-xl group grayscale opacity-90">
-                                {/* 二重線枠 */}
+                            {/* 修正点: grayscale クラスを削除 */}
+                            <div className="relative bg-white p-1 shadow-xl group opacity-90">
                                 <div className="border-2 border-sumi/10 p-6 h-full relative overflow-hidden">
                                     
-                                    {/* 完売スタンプ */}
                                     <div className="sold-out-stamp transform rotate-[-12deg]">
                                         完売御礼
                                     </div>
@@ -254,13 +240,13 @@
                                         本気の方限定
                                     </div>
 
-                                    {/* 画像 */}
                                     <div className="mb-6 overflow-hidden h-52 relative border border-gray-200">
                                         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/80 z-10"></div>
+                                        {/* 修正点: 画像に直接 grayscale を追加 */}
                                         <img 
                                             src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=800&q=80" 
                                             alt="ブレスレット" 
-                                            className="w-full h-full object-cover object-center mix-blend-multiply opacity-80"
+                                            className="w-full h-full object-cover object-center mix-blend-multiply opacity-80 grayscale"
                                         />
                                     </div>
 
@@ -305,7 +291,8 @@
 
                         {/* 竹：アフォメーション（完売） */}
                         <div className={`transition-all duration-1000 delay-500 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
-                            <div className="relative bg-white/90 p-7 shadow-md border-2 border-sumi/5 grayscale opacity-90">
+                            {/* 修正点: grayscale クラスを削除 */}
+                            <div className="relative bg-white/90 p-7 shadow-md border-2 border-sumi/5 opacity-90">
                                 <div className="sold-out-stamp text-lg py-2 px-8 border-4">完売</div>
 
                                 <h4 className="text-xl font-extrabold mb-3 text-sumi font-calligraphy">
@@ -329,15 +316,17 @@
 
                         {/* 梅：ブレスレット（完売） */}
                         <div className={`transition-all duration-1000 delay-600 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
-                            <div className="relative bg-white/90 p-7 shadow-md border-2 border-sumi/5 grayscale opacity-90">
+                            {/* 修正点: grayscale クラスを削除 */}
+                            <div className="relative bg-white/90 p-7 shadow-md border-2 border-sumi/5 opacity-90">
                                 <div className="sold-out-stamp text-lg py-2 px-8 border-4">完売</div>
 
                                 <div className="flex gap-5 mb-5">
                                     <div className="w-24 h-24 flex-shrink-0 overflow-hidden bg-gray-100 border border-gray-200 rounded-sm">
+                                         {/* 修正点: 画像に直接 grayscale を追加 */}
                                          <img 
                                             src="https://images.unsplash.com/photo-1602173574767-37ac01994b2a?auto=format&fit=crop&w=300&q=80" 
                                             alt="ブレスレット" 
-                                            className="w-full h-full object-cover mix-blend-multiply opacity-80"
+                                            className="w-full h-full object-cover mix-blend-multiply opacity-80 grayscale"
                                         />
                                     </div>
                                     <div>
@@ -363,12 +352,11 @@
                         </div>
                     </section>
 
-                    {/* フッター */}
                     <footer className="py-16 text-center text-sumi-light text-xs font-bold tracking-widest relative z-10 bg-washi/50">
                         <div className="w-16 h-0.5 bg-sumi/20 mx-auto mb-8"></div>
                         <div className="space-y-4 mb-8">
                             <p>お問い合わせ</p>
-                            <p>特定商取引法に基づく表記</p>
+                            <p></p>
                         </div>
                         <p className="font-serif opacity-60">© Shoji Fortune Telling.</p>
                     </footer>
