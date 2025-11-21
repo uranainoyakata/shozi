@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+　<!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
@@ -308,15 +308,19 @@
 
                         {/* 2. 竹（左に配置して視線を左へ戻す） */}
                         <div ref={addToRefs} className="stagger-item mr-4 md:mr-8">
-                            <div className="relative flex flex-row-reverse shadow-lg bg-white/90 border border-sumi/5">
+                            {/* レイアウト修正：高さを固定し、flexコンテナで制御 */}
+                            <div className="relative flex flex-row-reverse shadow-lg bg-white/90 border border-sumi/5 h-40">
                                 <div className="sold-out-stamp text-base py-2 px-6 border-4" style={{ transform: 'translate(-50%, -50%) rotate(8deg)', top: '40%', left: '20%' }}>完売</div>
                                 
-                                <div className="w-1/3 relative overflow-hidden border-l border-gray-100">
+                                {/* 画像コンテナ：幅を固定(w-40)し、縮小しないようにする(shrink-0) */}
+                                <div className="w-40 relative overflow-hidden border-l border-gray-100 shrink-0">
                                     <div className="absolute inset-0 bg-sumi/10 z-10"></div>
-                                    <img src="https://images.unsplash.com/photo-1517994112540-009c47ea476b?auto=format&fit=crop&w=300&q=80" className="w-full h-full object-cover grayscale" alt="言霊" />
+                                    {/* 新しい画像URL（言霊） */}
+                                    <img src="https://i.ibb.co/0p4rBQMM/Gemini-Generated-Image-imfrlrimfrlrimfr.jpg" className="w-full h-full object-cover grayscale" alt="言霊" />
                                 </div>
                                 
-                                <div className="w-2/3 p-5 flex flex-col justify-center text-right">
+                                {/* テキストコンテナ：残りの幅を埋める(flex-1) */}
+                                <div className="flex-1 p-5 flex flex-col justify-center text-right">
                                     <span className="text-xs font-bold text-sumi/40 mb-1 tracking-widest block text-left">竹・言霊</span>
                                     <h4 className="text-lg font-bold mb-2 font-calligraphy">言霊実践プログラム</h4>
                                     <div className="text-sumi/30 text-sm font-bold mt-2">
@@ -328,15 +332,19 @@
 
                         {/* 3. 梅（右に配置して視線を再度右へ・リズムの完結） */}
                         <div ref={addToRefs} className="stagger-item ml-8 md:ml-12">
-                             <div className="relative flex shadow-lg bg-white/90 border border-sumi/5">
+                            {/* レイアウト修正：高さを固定し、flexコンテナで制御 */}
+                            <div className="relative flex shadow-lg bg-white/90 border border-sumi/5 h-40">
                                 <div className="sold-out-stamp text-base py-2 px-6 border-4" style={{ transform: 'translate(-50%, -50%) rotate(-5deg)', top: '50%', left: '80%' }}>完売</div>
                                 
-                                <div className="w-1/3 relative overflow-hidden border-r border-gray-100">
+                                {/* 画像コンテナ：幅を固定(w-40)し、縮小しないようにする(shrink-0) */}
+                                <div className="w-40 relative overflow-hidden border-r border-gray-100 shrink-0">
                                     <div className="absolute inset-0 bg-sumi/10 z-10"></div>
-                                    <img src="https://images.unsplash.com/photo-1602173574767-37ac01994b2a?auto=format&fit=crop&w=300&q=80" className="w-full h-full object-cover grayscale" alt="ブレスレット" />
+                                    {/* 新しい画像URL（ブレスレット） */}
+                                    <img src="https://i.ibb.co/CsX7GNd0/Gemini-Generated-Image-hxuemwhxuemwhxue.jpg" className="w-full h-full object-cover grayscale" alt="ブレスレット" />
                                 </div>
                                 
-                                <div className="w-2/3 p-5 flex flex-col justify-center">
+                                {/* テキストコンテナ：残りの幅を埋める(flex-1) */}
+                                <div className="flex-1 p-5 flex flex-col justify-center">
                                     <span className="text-xs font-bold text-sumi/40 mb-1 tracking-widest">梅・守護</span>
                                     <h4 className="text-lg font-bold mb-2 font-calligraphy">守護・波動ブレス</h4>
                                     <div className="text-sumi/30 text-sm font-bold mt-2">
@@ -355,7 +363,7 @@
                             次回の扉が開くまで<br/>
                             しばしお待ちを
                         </p>
-                        <p className="text-[10px] text-sumi/40 font-serif">© Shoji Fortune Telling.</p>
+                        <p className="text-xs text-sumi/40 font-serif">© Shoji Fortune Telling.</p>
                     </footer>
 
                 </div>
