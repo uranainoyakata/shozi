@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>しょうじの限定サイト｜静寂の書</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sumi': '#1a1a1a',       /* 墨色：より濃い黒にして視認性アップ */
+                        'sumi-light': '#404040', /* 薄墨：少し濃くして読みやすく */
+                        'washi': '#f7f6f0',      /* 和紙：生成り色 */
+                        'shinku': '#c71f1f',     /* 真紅：鮮やかに */
+                        'gold-leaf': '#b8860b',  /* 金箔：視認性の高い暗めの金 */
+                    },
+                    fontFamily: {
+                        serif: ['"Shippori Mincho"', 'serif'],
+                        calligraphy: ['"Kaisei Tokumin"', 'serif'],
+                    },
+                    backgroundImage: {
+                        'washi-texture': "url('data:image/svg+xml,%3Csvg width=\\'200\\' height=\\'200\\' viewBox=\\'0 0 200 200\\' xmlns=\\'http://www.w3.org/2000/svg\\'%3E%3Cfilter id=\\'noise\\'%3E%3CfeTurbulence type=\\'fractalNoise\\' baseFrequency=\\'0.6\\' numOctaves=\\'3\\' stitchTiles=\\'stitch\\'/%3E%3C/filter%3E%3Crect width=\\'100%25\\' height=\\'100%25\\' filter=\\'url(%23noise)\\' opacity=\\'0.06\\'/%3E%3C/svg%3E')",
+                    },
+                    animation: {
+                        'ink-spread': 'inkSpread 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards',
+                        'fade-in-up': 'fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'draw-line': 'drawLine 1.5s ease-out forwards',
+                        'float-gentle': 'floatGentle 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        inkSpread: {
+                            '0%': { opacity: 0, filter: 'blur(10px)', transform: 'scale(0.95)' },
+                            '100%': { opacity: 1, filter: 'blur(0)', transform: 'scale(1)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: 0, transform: 'translateY(30px)' },
+                            '100%': { opacity: 1, transform: 'translateY(0)' },
+                        },
+                        drawLine: {
+                            '0%': { strokeDasharray: '1000', strokeDashoffset: '1000' },
+                            '100%': { strokeDashoffset: '0' },
+                        },
+                        floatGentle: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-5px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    
+    <!-- フォント読み込み -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700;800&family=Kaisei+Tokumin:wght@500;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Shippori Mincho', serif;
+            background-color: #f7f6f0;
+            color: #1a1a1a;
+            overflow-x: hidden;
+            line-height: 1.8; /* 行間を少し広げて読みやすく */
+        }
+
+        /* 縦書きユーティリティ */
+        .writing-vertical {
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            letter-spacing: 0.15em;
+            line-height: 2.0;
+        }
+
+        /* 落款（ハンコ）風スタイル */
+        .hanko {
+            border: 3px solid #c71f1f;
+            color: #c71f1f;
+            border-radius: 6px;
+            background-image: url("data:image/svg+xml,%3Csvg width='4' height='4' viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='1' fill='%23c71f1f' opacity='0.2'/%3E%3C/svg%3E");
+            box-shadow: 0 0 0 1px rgba(199, 31, 31, 0.1) inset;
+            transform: rotate(-2deg);
+        }
+
+        /* 完売の赤斜線スタンプ - より太く */
+        .sold-out-stamp {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+            border: 4px double #c71f1f;
+            color: #c71f1f;
+            font-family: 'Kaisei Tokumin', serif;
+            font-weight: 800;
+            padding: 1rem 2rem;
+            font-size: 1.8rem;
+            letter-spacing: 0.2em;
+            background-color: rgba(247, 246, 240, 0.9);
+            backdrop-filter: blur(4px);
+            z-index: 50;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            white-space: nowrap;
+        }
+
+        /* カスタムスクロールバー非表示 */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        // アイコンサイズを少し大きく
+        const Icons = {
+            Sparkles: ({ className }) => (
+                <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z" />
+                </svg>
+            ),
+            Gem: ({ className }) => (
+                <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M6 3H18L22 9L12 22L2 9L6 3Z" />
+                    <path d="M11 3L8 9L12 22L16 9L13 3" />
+                </svg>
+            ),
+            Scroll: ({ className }) => (
+                <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M19 21H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3H19C20.1046 3 21 3.89543 21 5V19C21 20.1046 20.1046 21 19 21Z" />
+                    <path d="M3 7H21" />
+                    <path d="M7 3V21" />
+                </svg>
+            )
+        };
+
+        const App = () => {
+            const [loaded, setLoaded] = useState(false);
+
+            useEffect(() => {
+                setTimeout(() => setLoaded(true), 300);
+            }, []);
+
+            return (
+                <div className="bg-washi bg-washi-texture min-h-screen w-full max-w-md mx-auto shadow-2xl relative overflow-hidden text-sumi selection:bg-sumi selection:text-washi">
+                    
+                    {/* 背景装飾：薄墨の滲み */}
+                    <div className="absolute top-[-100px] left-[-100px] w-[300px] h-[300px] bg-gray-300 rounded-full mix-blend-multiply filter blur-[80px] opacity-30 animate-float-gentle pointer-events-none"></div>
+                    <div className="absolute bottom-[-50px] right-[-50px] w-[250px] h-[250px] bg-gray-200 rounded-full mix-blend-multiply filter blur-[60px] opacity-40 animate-float-gentle pointer-events-none" style={{animationDelay: '2s'}}></div>
+
+                    {/* ヘッダー：文字を大きく */}
+                    <header className="pt-24 pb-12 px-6 relative z-10">
+                        <div className={`transition-all duration-1000 ease-out transform ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                            <div className="flex justify-between items-start h-60">
+                                {/* 左側：キャッチコピー（縦書き・サイズアップ） */}
+                                <div className="h-full py-2">
+                                    <p className="writing-vertical text-lg font-medium text-sumi-light tracking-widest h-full border-l-2 border-sumi-light/30 pl-5 leading-loose">
+                                        あなたと私を繋ぐ
+                                    </p>
+                                </div>
+
+                                {/* 右側：タイトルと印（縦書き・特大サイズ） */}
+                                <div className="flex flex-row-reverse items-start gap-5">
+                                    <h1 className="writing-vertical text-4xl md:text-5xl font-bold font-calligraphy tracking-widest leading-relaxed text-sumi drop-shadow-sm">
+                                        しょうじの<br/>
+                                        <span className="mt-6 inline-block">限定サイト</span>
+                                    </h1>
+                                    
+                                    {/* 落款風「開運満開」 */}
+                                    <div className="hanko writing-vertical text-base font-extrabold p-2 mt-3 bg-white/60 backdrop-blur-sm shadow-md">
+                                        開運<br/>満開
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+
+                    {/* プロフィール：文字サイズとコントラスト強化 */}
+                    <section className="px-5 mb-16 relative z-10">
+                        <div className={`relative bg-white/70 backdrop-blur-md p-8 shadow-[0_8px_30px_rgba(0,0,0,0.05)] border-2 border-white transition-all duration-1000 delay-200 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+                            {/* 四隅の装飾（太く） */}
+                            <div className="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 border-sumi/30"></div>
+                            <div className="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 border-sumi/30"></div>
+                            <div className="absolute bottom-3 left-3 w-4 h-4 border-b-2 border-l-2 border-sumi/30"></div>
+                            <div className="absolute bottom-3 right-3 w-4 h-4 border-b-2 border-r-2 border-sumi/30"></div>
+
+                            <div className="flex flex-col items-center text-center">
+                                <div className="mb-6 relative">
+                                    <div className="w-24 h-24 rounded-full bg-sumi text-washi flex items-center justify-center shadow-lg border-4 border-washi ring-1 ring-sumi/20 overflow-hidden">
+                                        <img 
+                                            src="https://ibb.co/1GN9DmK8" 
+                                            alt="占い師 しょうじ" 
+                                            className="w-full h-full object-cover"
+                                        />
+                                    </div>
+                                </div>
+                                
+                                <h2 className="text-2xl font-bold mb-3 font-calligraphy text-sumi">占い師 しょうじ</h2>
+                                <div className="w-12 h-0.5 bg-sumi/40 mb-8"></div>
+
+                                <div className="text-lg leading-relaxed font-medium text-sumi space-y-5 font-serif">
+                                    <p>
+                                        ようこそ、<br/>
+                                        <span className="font-bold text-xl">静寂の間へ。</span>
+                                    </p>
+                                    <p>
+                                        偶然ではありません。<br/>
+                                        あなたの魂が、<br/>
+                                        ここへ導いたのです。
+                                    </p>
+                                    <p>
+                                        墨を磨るように心を鎮め、<br/>
+                                        運命の糸を<br/>
+                                        結び直してまいります。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* 商品リスト */}
+                    <section className="px-4 pb-24 space-y-12 relative z-10">
+                        <div className={`text-center mb-10 transition-all duration-1000 delay-300 ${loaded ? 'opacity-100' : 'opacity-0'}`}>
+                            <h3 className="inline-block text-2xl font-bold font-calligraphy border-b-2 border-sumi/40 pb-3 px-10 tracking-widest">
+                                特別鑑定
+                            </h3>
+                            <p className="text-base text-shinku mt-4 font-bold tracking-widest animate-pulse bg-white/50 inline-block px-4 py-1 rounded">
+                                ※全枠完売につき受付終了
+                            </p>
+                        </div>
+
+                        {/* 松：フルセット（完売） */}
+                        <div className={`transition-all duration-1000 delay-400 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+                            <div className="relative bg-white p-1 shadow-xl group grayscale opacity-90">
+                                {/* 二重線枠 */}
+                                <div className="border-2 border-sumi/10 p-6 h-full relative overflow-hidden">
+                                    
+                                    {/* 完売スタンプ */}
+                                    <div className="sold-out-stamp transform rotate-[-12deg]">
+                                        完売御礼
+                                    </div>
+
+                                    <div className="absolute -top-1 -right-1 bg-sumi text-washi text-xs px-4 py-2 font-serif font-bold tracking-widest shadow-md z-10">
+                                        本気の方限定
+                                    </div>
+
+                                    {/* 画像 */}
+                                    <div className="mb-6 overflow-hidden h-52 relative border border-gray-200">
+                                        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/80 z-10"></div>
+                                        <img 
+                                            src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=800&q=80" 
+                                            alt="ブレスレット" 
+                                            className="w-full h-full object-cover object-center mix-blend-multiply opacity-80"
+                                        />
+                                    </div>
+
+                                    <h4 className="text-2xl font-extrabold mb-3 text-sumi font-calligraphy leading-tight">
+                                        覚醒・開運<br/>フルセット
+                                    </h4>
+                                    <div className="flex items-center gap-3 mb-8 text-sm font-bold text-sumi-light">
+                                        <span className="border-2 border-sumi/40 px-3 py-1 rounded-sm">二週間集中</span>
+                                        <span className="text-base">★★★★★</span>
+                                    </div>
+
+                                    <ul className="space-y-4 text-base text-sumi mb-10 font-semibold">
+                                        <li className="flex items-start gap-3">
+                                            <Icons.Sparkles className="w-6 h-6 text-gold-leaf flex-shrink-0 mt-0.5" />
+                                            <span>毎日アフォメーション配信</span>
+                                        </li>
+                                        <li className="flex items-start gap-3">
+                                            <Icons.Gem className="w-6 h-6 text-gold-leaf flex-shrink-0 mt-0.5" />
+                                            <span>波動調整ブレスレット</span>
+                                        </li>
+                                        <li className="flex items-start gap-3">
+                                            <div className="w-6 h-6 flex-shrink-0 flex items-center justify-center text-xs border-2 border-sumi/40 rounded-full font-bold">秘</div>
+                                            <span>個別エネルギー調整</span>
+                                        </li>
+                                    </ul>
+
+                                    <div className="flex flex-col items-end border-t-2 border-sumi/10 pt-5 gap-3">
+                                        <div className="text-right w-full">
+                                            <span className="text-xs font-bold text-sumi-light block mb-1">奉納価格</span>
+                                            <div className="flex items-baseline justify-end gap-1">
+                                                <span className="text-4xl font-bold text-sumi/40 line-through decoration-2 decoration-sumi/40">100,000</span>
+                                                <span className="text-base font-bold text-sumi/40">円</span>
+                                            </div>
+                                        </div>
+                                        <button disabled className="w-full bg-gray-200 text-gray-500 py-4 text-lg font-bold tracking-widest cursor-not-allowed border-2 border-gray-300">
+                                            受付終了
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* 竹：アフォメーション（完売） */}
+                        <div className={`transition-all duration-1000 delay-500 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+                            <div className="relative bg-white/90 p-7 shadow-md border-2 border-sumi/5 grayscale opacity-90">
+                                <div className="sold-out-stamp text-lg py-2 px-8 border-4">完売</div>
+
+                                <h4 className="text-xl font-extrabold mb-3 text-sumi font-calligraphy">
+                                    言霊（コトダマ）実践
+                                </h4>
+                                <p className="text-sm font-medium text-sumi-light mb-6 leading-relaxed">
+                                    言葉の力で意識を書き換える、<br/>二週間の変容プログラム。
+                                </p>
+
+                                <div className="flex flex-col border-t-2 border-sumi/10 pt-4 gap-4">
+                                    <div className="text-right">
+                                        <span className="text-3xl font-bold text-sumi/40 line-through decoration-2">50,000</span>
+                                        <span className="text-sm font-bold text-sumi/40 ml-1">円</span>
+                                    </div>
+                                    <div className="text-center text-sm font-bold text-gray-400 tracking-widest border-2 border-gray-300 py-2 bg-gray-100">
+                                        終了しました
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* 梅：ブレスレット（完売） */}
+                        <div className={`transition-all duration-1000 delay-600 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+                            <div className="relative bg-white/90 p-7 shadow-md border-2 border-sumi/5 grayscale opacity-90">
+                                <div className="sold-out-stamp text-lg py-2 px-8 border-4">完売</div>
+
+                                <div className="flex gap-5 mb-5">
+                                    <div className="w-24 h-24 flex-shrink-0 overflow-hidden bg-gray-100 border border-gray-200 rounded-sm">
+                                         <img 
+                                            src="https://images.unsplash.com/photo-1602173574767-37ac01994b2a?auto=format&fit=crop&w=300&q=80" 
+                                            alt="ブレスレット" 
+                                            className="w-full h-full object-cover mix-blend-multiply opacity-80"
+                                        />
+                                    </div>
+                                    <div>
+                                        <h4 className="text-xl font-extrabold mb-2 text-sumi font-calligraphy">
+                                            守護・波動<br/>ブレスレット
+                                        </h4>
+                                        <p className="text-sm font-medium text-sumi-light leading-relaxed">
+                                            あなたの波動に合わせた、<br/>一点物のお守り。
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="flex flex-col border-t-2 border-sumi/10 pt-4 gap-4">
+                                    <div className="text-right">
+                                        <span className="text-3xl font-bold text-sumi/40 line-through decoration-2">50,000</span>
+                                        <span className="text-sm font-bold text-sumi/40 ml-1">円</span>
+                                    </div>
+                                    <div className="text-center text-sm font-bold text-gray-400 tracking-widest border-2 border-gray-300 py-2 bg-gray-100">
+                                        終了しました
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* フッター */}
+                    <footer className="py-16 text-center text-sumi-light text-xs font-bold tracking-widest relative z-10 bg-washi/50">
+                        <div className="w-16 h-0.5 bg-sumi/20 mx-auto mb-8"></div>
+                        <div className="space-y-4 mb-8">
+                            <p>お問い合わせ</p>
+                            <p>特定商取引法に基づく表記</p>
+                        </div>
+                        <p className="font-serif opacity-60">© Shoji Fortune Telling.</p>
+                    </footer>
+
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
+</body>
+</html>
