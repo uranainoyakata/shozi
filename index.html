@@ -16,6 +16,7 @@
                         'wave-foam': '#e0f2fe',      // 波泡
                         'enishi-red': '#c24a4a',     // 縁の赤（少し落ち着いた色）
                         'sand-gold': '#d4c5a3',      // 砂浜の金
+                        'line-green': '#06c755',     // LINEのブランドカラー
                     },
                     fontFamily: {
                         serif: ['"Shippori Mincho"', 'serif'],
@@ -113,8 +114,8 @@
                     {/* 背景グラデーション */}
                     <div className="absolute inset-0 bg-sea-gradient"></div>
                     
-                    {/* 水面のテクスチャ */}
-                    <div className="absolute inset-0 water-surface animate-pulse" style={{ animationDuration: '8s' }}></div>
+                    {/* 水面のテクスチャ (点滅アニメーション削除) */}
+                    <div className="absolute inset-0 water-surface"></div>
 
                     {/* 波のアニメーションレイヤー */}
                     <div className="absolute bottom-0 left-0 w-[200%] h-64 opacity-30 transform translate-y-1/2">
@@ -127,21 +128,6 @@
                             <path d="M0,100 C200,150 400,50 600,100 C800,150 1000,50 1200,100 C1400,150 1600,50 1800,100 V200 H0 Z" />
                         </svg>
                     </div>
-
-                    {/* 浮遊する光（水面のきらめき） */}
-                    {[...Array(6)].map((_, i) => (
-                        <div
-                            key={i}
-                            className="absolute rounded-full bg-white blur-xl animate-shimmer"
-                            style={{
-                                left: `${Math.random() * 100}%`,
-                                top: `${Math.random() * 80}%`,
-                                width: `${Math.random() * 100 + 50}px`,
-                                height: `${Math.random() * 100 + 50}px`,
-                                animationDelay: `${Math.random() * 5}s`
-                            }}
-                        />
-                    ))}
                 </div>
             );
         };
@@ -201,6 +187,30 @@
                             しょうじの書
                         </div>
                         <div className={`mt-4 w-px h-16 bg-enishi-red origin-top transition-transform duration-1000 delay-500 ${stage >= 1 ? 'scale-y-100' : 'scale-y-0'}`}></div>
+                    </div>
+                </div>
+            );
+        };
+
+        // --- コンポーネント: 折りたたみ説明 ---
+        // 変更点: 文字サイズを大きく (text-xs -> text-base/text-lg), パディング追加, アイコンサイズ変更
+        const CollapsibleDescription = ({ children, align = 'left' }) => {
+            const [isOpen, setIsOpen] = useState(false);
+            return (
+                <div className={`mt-5 w-full flex flex-col ${align === 'right' ? 'items-end' : 'items-start'}`}>
+                    <button 
+                        onClick={() => setIsOpen(!isOpen)} 
+                        className="text-base md:text-lg font-bold text-seto-blue hover:text-enishi-red underline underline-offset-4 flex items-center gap-2 transition-colors z-20 py-2"
+                    >
+                        {isOpen ? '詳細を閉じる' : '詳細を見る'}
+                        <span className={`transform transition-transform duration-300 text-sm ${isOpen ? 'rotate-180' : ''}`}>▼</span>
+                    </button>
+                    <div className={`w-full grid transition-[grid-template-rows] duration-500 ease-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
+                        <div className="overflow-hidden">
+                            <div className="pt-4 text-sm md:text-base leading-relaxed text-seto-indigo/90 font-serif bg-white/60 p-4 md:p-5 rounded-lg mt-2 border border-white/50 shadow-inner">
+                                {children}
+                            </div>
+                        </div>
                     </div>
                 </div>
             );
@@ -338,14 +348,119 @@
                                 <p className="mt-4 text-[10px] md:text-xs text-seto-blue/60 tracking-widest uppercase">Limited Collection</p>
                             </div>
 
+                             {/* New: 期間限定 特別鑑定 (Combined & Highlighted) */}
+                             <div ref={addToRefs} className="opacity-0 translate-y-5 transition-all duration-1000 ease-out mx-2 md:mx-4 mb-12 group">
+                                <div className="relative glass-water rounded-xl overflow-hidden md:flex flex-col hover:shadow-lg transition-all duration-500 bg-white/40 border-2 border-enishi-red/30 shadow-enishi-red/10">
+                                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-enishi-red to-transparent opacity-80"></div>
+                                    <div className="absolute top-2 left-2 z-20">
+                                            <div className="bg-enishi-red text-white text-xs font-bold px-3 py-1 rounded shadow-md border border-white/20 tracking-widest font-serif animate-pulse">
+                                            期間限定SALE
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="md:flex">
+                                        {/* 画像エリア (30% width on PC) */}
+                                        <div className="w-full md:w-1/3 h-64 md:h-auto relative overflow-hidden">
+                                            <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?q=80&w=987&auto=format&fit=crop" className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 mix-blend-multiply" alt="特別鑑定" />
+                                            <div className="absolute inset-0 bg-seto-indigo/10 mix-blend-overlay"></div>
+                                            {/* 画像上にも割引バッジを配置 */}
+                                            <div className="absolute bottom-2 right-2 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-enishi-red font-bold text-xs shadow-sm border border-enishi-red/20">
+                                                最大 50% OFF
+                                            </div>
+                                        </div>
+                                        
+                                        {/* テキストエリア */}
+                                        <div className="w-full md:w-2/3 p-5 md:p-8 flex flex-col justify-center relative bg-gradient-to-br from-white/30 to-enishi-red/5">
+                                            <h4 className="text-xl md:text-2xl font-bold mb-6 font-calligraphy text-seto-indigo text-center md:text-left border-b border-enishi-red/20 pb-3">
+                                                <span className="text-enishi-red mr-2">◆</span>
+                                                運命解読・特別鑑定
+                                                <span className="text-enishi-red ml-2">◆</span>
+                                            </h4>
+                                            
+                                            <div className="space-y-4">
+                                                {/* Menu A */}
+                                                <div className="relative bg-white/60 border border-enishi-red/20 p-4 rounded-lg hover:bg-white/80 transition-all duration-300 shadow-sm group-hover:shadow-md">
+                                                    <div className="absolute -right-8 top-3 bg-enishi-red text-white text-[10px] font-bold px-8 py-1 rotate-45 shadow-sm z-10">
+                                                        50% OFF
+                                                    </div>
+                                                    <div className="flex flex-col md:flex-row justify-between items-center gap-2">
+                                                        <div className="text-center md:text-left">
+                                                            <span className="text-xs text-seto-blue/60 block tracking-widest mb-1">Deep Reading</span>
+                                                            <span className="font-bold text-lg text-seto-indigo">運命・本鑑定</span>
+                                                        </div>
+                                                        <div className="flex items-center justify-center gap-4 bg-seto-white/50 px-4 py-2 rounded-full border border-white/50">
+                                                        <div className="flex flex-col items-end leading-none">
+                                                            <span className="text-[10px] text-seto-blue/50">通常価格</span>
+                                                            <span className="text-seto-blue/40 text-sm line-through decoration-enishi-red/50">8,000円</span>
+                                                        </div>
+                                                        <span className="text-enishi-red text-xl">→</span>
+                                                        <div className="flex flex-col items-start leading-none">
+                                                            <span className="text-[10px] text-enishi-red font-bold">特別価格</span>
+                                                            <span className="text-enishi-red text-2xl font-bold font-calligraphy">4,000円</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                {/* 折りたたみ説明: Menu A */}
+                                                    <CollapsibleDescription align="right">
+                                                        <p>
+                                                            あなたの生年月日と姓名から、生まれ持った運命の地図を紐解きます。<br/>
+                                                            現状の悩みに対する具体的な解決策と、今後3ヶ月の運気の流れをお伝えします。<br/>
+                                                            文章（テキスト）でのお届けとなりますので、何度も読み返して心の支えにしていただけます。
+                                                        </p>
+                                                    </CollapsibleDescription>
+                                                </div>
+
+                                                {/* Menu B */}
+                                                <div className="relative bg-white/60 border border-enishi-red/20 p-4 rounded-lg hover:bg-white/80 transition-all duration-300 shadow-sm group-hover:shadow-md">
+                                                     <div className="absolute -right-8 top-3 bg-enishi-red text-white text-[10px] font-bold px-8 py-1 rotate-45 shadow-sm z-10">
+                                                        33% OFF
+                                                    </div>
+                                                    <div className="flex flex-col md:flex-row justify-between items-center gap-2">
+                                                        <div className="text-center md:text-left">
+                                                            <span className="text-xs text-seto-blue/60 block tracking-widest mb-1">Soul Call</span>
+                                                            <span className="font-bold text-lg text-seto-indigo">電話鑑定（30分）</span>
+                                                        </div>
+                                                        <div className="flex items-center justify-center gap-4 bg-seto-white/50 px-4 py-2 rounded-full border border-white/50">
+                                                        <div className="flex flex-col items-end leading-none">
+                                                            <span className="text-[10px] text-seto-blue/50">通常価格</span>
+                                                            <span className="text-seto-blue/40 text-sm line-through decoration-enishi-red/50">15,000円</span>
+                                                        </div>
+                                                        <span className="text-enishi-red text-xl">→</span>
+                                                        <div className="flex flex-col items-start leading-none">
+                                                            <span className="text-[10px] text-enishi-red font-bold">特別価格</span>
+                                                            <span className="text-enishi-red text-2xl font-bold font-calligraphy">10,000円</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                {/* 折りたたみ説明: Menu B */}
+                                                    <CollapsibleDescription align="right">
+                                                        <p>
+                                                            直接お話しすることで、声の波動から現在のエネルギー状態を読み取ります。<br/>
+                                                            誰にも言えない悩み、複雑な人間関係など、リアルタイムで対話しながら心の絡まりを解きほぐします。<br/>
+                                                            鑑定後には心が軽くなり、前を向く勇気が湧いてくると好評です。
+                                                        </p>
+                                                    </CollapsibleDescription>
+                                                </div>
+                                            </div>
+                                            
+                                            {/* 注釈 */}
+                                            <p className="text-[10px] text-center md:text-right text-enishi-red/80 mt-4 tracking-widest font-bold">
+                                                ※ お申し込みは下部記載の公式LINEより承ります
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             {/* 1. 松 (Full Set) */}
                             {/* スマホでも見やすいカード型レイアウト */}
                             <div ref={addToRefs} className="opacity-0 translate-x-5 transition-all duration-1000 ease-out mx-2 md:ml-8 group">
                                 <div className="relative glass-water rounded-xl overflow-hidden hover:shadow-lg transition-all duration-500 bg-white/40">
                                     <div className="absolute top-2 right-2 md:top-4 md:right-4 z-20">
-                                        {/* 変更：赤文字で大きく、白背景でスタンプ風に */}
-                                        <div className="bg-white/95 backdrop-blur text-enishi-red text-2xl font-bold px-4 py-2 rounded shadow-lg border-2 border-enishi-red transform rotate-6 tracking-widest">
-                                            SOLD OUT
+                                        <div className="bg-white/95 backdrop-blur text-enishi-red text-lg md:text-xl font-bold px-4 py-2 rounded shadow-lg border-2 border-enishi-red transform rotate-6 tracking-widest font-serif">
+                                            残り 1 枠
                                         </div>
                                     </div>
 
@@ -364,10 +479,20 @@
                                     <div className="p-5 md:p-6 relative">
                                         <h4 className="text-lg font-bold mb-2 font-calligraphy text-seto-indigo group-hover:text-enishi-red transition-colors">覚醒・開運フルセット</h4>
                                         <p className="text-xs text-seto-blue mb-4">波動調整ブレスレット × 秘伝アフォメーション</p>
+                                        {/* 価格変更: 赤文字・強調・斜線なし */}
                                         <div className="flex justify-end items-baseline gap-2 text-seto-blue/60">
-                                            <span className="text-[10px]">奉納価格</span>
-                                            <span className="text-xl font-medium font-calligraphy text-seto-indigo/50 line-through">100,000</span>
+                                            <span className="text-xs font-bold text-seto-indigo">奉納価格</span>
+                                            <span className="text-2xl font-bold font-calligraphy text-enishi-red">100,000円</span>
                                         </div>
+
+                                        {/* 折りたたみ説明 */}
+                                        <CollapsibleDescription align="left">
+                                            <p>
+                                                【完全限定生産】あなたの魂の波動に合わせて調整された一点物のパワーストーンブレスレットと、運命を好転させるための秘伝アフォメーション（言霊）のセットです。<br/>
+                                                さらに、3ヶ月間の特別遠隔ヒーリングも付帯します。<br/>
+                                                人生を本気で変えたい方、大きな転機を迎えている方に捧げる、最高峰のプログラムです。
+                                            </p>
+                                        </CollapsibleDescription>
                                     </div>
                                 </div>
                             </div>
@@ -375,24 +500,35 @@
                             {/* 2. 竹 (Word) */}
                             {/* スマホ：縦積み、PC：横並び（画像左） */}
                             <div ref={addToRefs} className="opacity-0 -translate-x-5 transition-all duration-1000 ease-out mx-2 md:mr-8 group">
-                                <div className="relative glass-water rounded-xl overflow-hidden flex flex-col md:flex-row-reverse md:h-40 hover:shadow-lg transition-all duration-500 bg-white/40">
+                                <div className="relative glass-water rounded-xl overflow-hidden flex flex-col md:flex-row-reverse md:h-auto hover:shadow-lg transition-all duration-500 bg-white/40">
                                     <div className="absolute top-2 left-2 z-20">
-                                         {/* 変更：赤文字で大きく */}
-                                         <div className="bg-white/95 backdrop-blur text-enishi-red text-xl font-bold px-3 py-1 rounded shadow-md border-2 border-enishi-red tracking-widest">
-                                            完売
+                                         <div className="bg-white/95 backdrop-blur text-enishi-red text-base font-bold px-3 py-1 rounded shadow-md border-2 border-enishi-red tracking-widest font-serif">
+                                            残り 5 枠
                                         </div>
                                     </div>
                                     
-                                    <div className="w-full md:w-1/3 h-48 md:h-full relative overflow-hidden border-b md:border-b-0 md:border-l border-white/40">
+                                    <div className="w-full md:w-1/3 h-48 md:h-auto relative overflow-hidden border-b md:border-b-0 md:border-l border-white/40">
                                         <img src="https://i.ibb.co/0p4rBQMM/Gemini-Generated-Image-imfrlrimfrlrimfr.jpg" className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 mix-blend-multiply" alt="言霊" />
                                     </div>
                                     
                                     <div className="w-full md:w-2/3 p-5 flex flex-col justify-center text-left md:text-right relative">
                                         <span className="text-[10px] text-seto-blue/60 mb-1 tracking-widest block md:text-left">02. 湊の言葉</span>
                                         <h4 className="text-base font-bold mb-2 font-calligraphy text-seto-indigo group-hover:text-enishi-red transition-colors">言霊実践プログラム</h4>
-                                        <div className="text-seto-blue/40 text-sm font-medium mt-1">
-                                            <span className="line-through">50,000</span>
+                                        {/* 価格変更: 赤文字・強調・斜線なし */}
+                                        <div className="flex justify-start md:justify-end items-baseline gap-2 mt-1">
+                                             <span className="text-xs font-bold text-seto-indigo">奉納価格</span>
+                                             <span className="text-xl font-bold font-calligraphy text-enishi-red">50,000円</span>
                                         </div>
+
+                                        {/* 折りたたみ説明 */}
+                                        <CollapsibleDescription align="right">
+                                            <p>
+                                                言葉には現実を創る力があります。<br/>
+                                                あなた専用に紡がれた「真言（マントラ）」を毎日唱えることで、潜在意識を書き換え、幸運体質へと変化させます。<br/>
+                                                21日間の実践サポート付きで、習慣化まで徹底的に寄り添います。<br/>
+                                                人間関係や仕事の停滞を感じている方におすすめです。
+                                            </p>
+                                        </CollapsibleDescription>
                                     </div>
                                 </div>
                             </div>
@@ -400,24 +536,62 @@
                             {/* 3. 梅 (Protection) */}
                             {/* スマホ：縦積み、PC：横並び（画像右） */}
                             <div ref={addToRefs} className="opacity-0 translate-x-5 transition-all duration-1000 ease-out mx-2 md:ml-12 group">
-                                <div className="relative glass-water rounded-xl overflow-hidden flex flex-col md:flex-row md:h-40 hover:shadow-lg transition-all duration-500 bg-white/40">
+                                <div className="relative glass-water rounded-xl overflow-hidden flex flex-col md:flex-row md:h-auto hover:shadow-lg transition-all duration-500 bg-white/40">
                                     <div className="absolute top-2 right-2 z-20">
-                                         {/* 変更：赤文字で大きく */}
-                                         <div className="bg-white/95 backdrop-blur text-enishi-red text-xl font-bold px-3 py-1 rounded shadow-md border-2 border-enishi-red tracking-widest">
-                                            完売
+                                         <div className="bg-white/95 backdrop-blur text-enishi-red text-base font-bold px-3 py-1 rounded shadow-md border-2 border-enishi-red tracking-widest font-serif">
+                                            残り 4 枠
                                         </div>
                                     </div>
 
-                                    <div className="w-full md:w-1/3 h-48 md:h-full relative overflow-hidden border-b md:border-b-0 md:border-r border-white/40">
+                                    <div className="w-full md:w-1/3 h-48 md:h-auto relative overflow-hidden border-b md:border-b-0 md:border-r border-white/40">
                                         <img src="https://i.ibb.co/CsX7GNd0/Gemini-Generated-Image-hxuemwhxuemwhxue.jpg" className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 mix-blend-multiply" alt="ブレスレット" />
                                     </div>
                                     
                                     <div className="w-full md:w-2/3 p-5 flex flex-col justify-center relative">
                                         <span className="text-[10px] text-seto-blue/60 mb-1 tracking-widest">03. 守護の波</span>
                                         <h4 className="text-base font-bold mb-2 font-calligraphy text-seto-indigo group-hover:text-enishi-red transition-colors">守護・波動ブレス</h4>
-                                        <div className="text-seto-blue/40 text-sm font-medium mt-1">
-                                            <span className="line-through">30,000</span>
+                                        {/* 価格変更: 赤文字・強調・斜線なし */}
+                                        <div className="flex justify-start items-baseline gap-2 mt-1">
+                                             <span className="text-xs font-bold text-seto-indigo">奉納価格</span>
+                                             <span className="text-xl font-bold font-calligraphy text-enishi-red">30,000円</span>
                                         </div>
+
+                                        {/* 折りたたみ説明 */}
+                                        <CollapsibleDescription align="left">
+                                            <p>
+                                                邪気を払い、持ち主を守護するためのブレスレットです。<br/>
+                                                厳選された天然石を使用し、瀬戸内の海で浄化した後、祈祷を込めてお届けします。<br/>
+                                                日常的に身につけることで、周囲のネガティブな影響から身を守り、心の安定を保つサポートをします。<br/>
+                                                シンプルで日常使いしやすいデザインも魅力です。
+                                            </p>
+                                        </CollapsibleDescription>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* 追加: お申し込み案内 (LINE CTA) */}
+                            <div ref={addToRefs} className="opacity-0 translate-y-8 transition-all duration-1000 ease-out mt-20 text-center">
+                                <div className="inline-block p-8 rounded-2xl glass-water relative overflow-hidden group hover:shadow-lg transition-all duration-500 max-w-md w-full mx-auto">
+                                    <div className="absolute inset-0 bg-gradient-to-r from-seto-white/50 via-white/80 to-seto-white/50 opacity-50"></div>
+                                    <div className="relative z-10">
+                                        <h3 className="text-lg md:text-xl font-bold font-calligraphy text-seto-indigo mb-4 border-b border-seto-blue/10 pb-4 inline-block">
+                                            お申し込み・お問い合わせ
+                                        </h3>
+                                        <p className="text-sm md:text-base text-seto-blue font-serif leading-loose mb-8">
+                                            鑑定および限定品のお申し込みは、<br/>
+                                            全て<span className="text-enishi-red font-bold border-b border-enishi-red/30">公式LINE</span>にて承っております。<br/>
+                                            <span className="text-xs opacity-80 mt-3 block">ご希望のメニュー名を添えて<br className="md:hidden"/>メッセージをお送りください。</span>
+                                        </p>
+                                        
+                                        <a href="https://lin.ee/LB2rF3Z" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 px-8 py-4 bg-line-green text-white font-bold rounded-full shadow-md hover:shadow-xl hover:bg-[#05b54c] transition-all duration-300 transform hover:-translate-y-1 tracking-widest text-sm md:text-base group">
+                                            <span>公式LINEで申し込む</span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 group-hover:translate-x-1 transition-transform">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                                            </svg>
+                                        </a>
+                                        <p className="text-[10px] text-seto-blue/40 mt-4 tracking-widest">
+                                            Official LINE Account
+                                        </p>
                                     </div>
                                 </div>
                             </div>
