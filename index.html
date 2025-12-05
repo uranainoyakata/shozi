@@ -185,7 +185,7 @@
                 <div className={`fixed inset-0 z-50 flex items-center justify-center bg-[#f3f8fa] transition-opacity duration-1000 ${stage === 2 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
                     <div className="relative flex flex-col items-center">
                         <div className={`text-seto-indigo font-calligraphy text-2xl md:text-3xl tracking-[0.5em] transition-all duration-1500 transform ${stage >= 1 ? 'opacity-100 scale-100 blur-0' : 'opacity-0 scale-95 blur-sm'}`}>
-                            しょうじの書
+                            しょうじの案内書
                         </div>
                         <div className={`mt-4 w-px h-16 bg-enishi-red origin-top transition-transform duration-1000 delay-500 ${stage >= 1 ? 'scale-y-100' : 'scale-y-0'}`}></div>
                     </div>
@@ -354,13 +354,14 @@
                                     <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-enishi-red to-transparent opacity-80"></div>
                                     <div className="absolute top-2 left-2 z-20">
                                             <div className="bg-enishi-red text-white text-xs md:text-sm font-bold px-3 py-1 rounded shadow-md border border-white/20 tracking-widest font-serif animate-pulse">
-                                            期間限定SALE
+                                            期間限定価格
                                         </div>
                                     </div>
                                     
                                     {/* 画像エリア (40% width on PC for impact) */}
                                     <div className="w-full md:w-5/12 h-64 md:h-auto relative overflow-hidden">
-                                        <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?q=80&w=987&auto=format&fit=crop" className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 mix-blend-multiply" alt="特別鑑定" />
+                                        <img src="https://i.ibb.co/pTz16RJ/image.png" 
+className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 mix-blend-multiply" alt="特別鑑定" />
                                         <div className="absolute inset-0 bg-seto-indigo/10 mix-blend-overlay"></div>
                                         {/* 画像上にも割引バッジを配置 */}
                                         <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur px-4 py-2 rounded-full text-enishi-red font-bold text-sm shadow-sm border border-enishi-red/20">
@@ -372,7 +373,7 @@
                                     <div className="w-full md:w-7/12 p-6 md:p-10 flex flex-col justify-center relative bg-gradient-to-br from-white/30 to-enishi-red/5">
                                         <h4 className="text-xl md:text-3xl font-bold mb-8 font-calligraphy text-seto-indigo text-center md:text-left border-b border-enishi-red/20 pb-4">
                                             <span className="text-enishi-red mr-2">◆</span>
-                                            運命解読・特別鑑定
+                                            しょうじの特別本鑑定
                                             <span className="text-enishi-red ml-2">◆</span>
                                         </h4>
                                         
@@ -385,7 +386,7 @@
                                                 <div className="flex flex-col lg:flex-row justify-between items-center gap-4">
                                                     <div className="text-center lg:text-left">
                                                         <span className="text-xs md:text-sm text-seto-blue/60 block tracking-widest mb-1">Deep Reading</span>
-                                                        <span className="font-bold text-lg md:text-xl text-seto-indigo">運命・本鑑定</span>
+                                                        <span className="font-bold text-lg md:text-xl text-seto-indigo">本鑑定</span>
                                                     </div>
                                                     <div className="flex items-center justify-center gap-4 bg-seto-white/50 px-5 py-3 rounded-full border border-white/50">
                                                         <div className="flex flex-col items-end leading-none">
@@ -466,31 +467,31 @@
 
                                         <div className="h-64 relative overflow-hidden flex-shrink-0">
                                             <img 
-                                                src="https://i.ibb.co/fY4Tvqjc/Gemini-Generated-Image-hnx65ghnx65ghnx6.jpg" 
+                                                src="https://i.ibb.co/CsX7GNd0/Gemini-Generated-Image-hxuemwhxuemwhxue.jpg" 
                                                 className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 mix-blend-multiply"
                                                 alt="フルセット"
                                             />
                                             <div className="absolute inset-0 bg-seto-indigo/10 mix-blend-overlay"></div>
                                             <div className="absolute bottom-3 left-4 text-white text-xs tracking-[0.2em] font-serif z-20 drop-shadow-md">
-                                                01. 凪の極み
+                                                01. あなただけの
                                             </div>
                                         </div>
 
                                         <div className="p-6 relative flex flex-col flex-grow">
-                                            <h4 className="text-lg md:text-xl font-bold mb-3 font-calligraphy text-seto-indigo group-hover:text-enishi-red transition-colors">覚醒・開運フルセット</h4>
+                                            <h4 className="text-lg md:text-xl font-bold mb-3 font-calligraphy text-seto-indigo group-hover:text-enishi-red transition-colors">あなただけのアイテム作成</h4>
                                             <p className="text-xs md:text-sm text-seto-blue mb-4 leading-relaxed">波動調整ブレスレット × 秘伝アフォメーション</p>
                                             
                                             <div className="mt-auto">
                                                 <div className="flex justify-end items-baseline gap-2 text-seto-blue/60 mb-2">
                                                     <span className="text-xs font-bold text-seto-indigo">奉納価格</span>
-                                                    <span className="text-2xl md:text-3xl font-bold font-calligraphy text-enishi-red">100,000円</span>
+                                                    <span className="text-2xl md:text-3xl font-bold font-calligraphy text-enishi-red">120,000円</span>
                                                 </div>
 
                                                 {/* 折りたたみ説明 */}
                                                 <CollapsibleDescription align="right">
                                                     <p>
-                                                        【完全限定生産】あなたの魂の波動に合わせて調整された一点物のパワーストーンブレスレットと、運命を好転させるための秘伝アフォメーション（言霊）のセットです。<br/>
-                                                        さらに、3ヶ月間の特別遠隔ヒーリングも付帯します。<br/>
+                                                        【完全受注案内】パワーストーン、ブレスレット、アクセサリーなどあなたの生活スタイルに合わせて提案。<br/>
+                                                        しょうじがあなたに合わせて瀬戸内の波動を「31時間」込めた上でお届け致します<br/>
                                                         人生を本気で変えたい方、大きな転機を迎えている方に捧げる、最高峰のプログラムです。
                                                     </p>
                                                 </CollapsibleDescription>
@@ -516,13 +517,13 @@
                                         </div>
                                         
                                         <div className="p-6 relative flex flex-col flex-grow">
-                                            <h4 className="text-lg md:text-xl font-bold mb-3 font-calligraphy text-seto-indigo group-hover:text-enishi-red transition-colors">言霊実践プログラム</h4>
+                                            <h4 className="text-lg md:text-xl font-bold mb-3 font-calligraphy text-seto-indigo group-hover:text-enishi-red transition-colors">共に歩む言霊実践</h4>
                                             <p className="text-xs md:text-sm text-seto-blue mb-4 leading-relaxed">真言（マントラ）伝授 × 21日間サポート</p>
                                             
                                             <div className="mt-auto">
                                                 <div className="flex justify-end items-baseline gap-2 mb-2">
                                                      <span className="text-xs font-bold text-seto-indigo">奉納価格</span>
-                                                     <span className="text-xl md:text-2xl font-bold font-calligraphy text-enishi-red">50,000円</span>
+                                                     <span className="text-xl md:text-2xl font-bold font-calligraphy text-enishi-red">80,000円</span>
                                                 </div>
 
                                                 {/* 折りたたみ説明 */}
@@ -549,29 +550,29 @@
                                         </div>
 
                                         <div className="h-64 relative overflow-hidden flex-shrink-0">
-                                            <img src="https://i.ibb.co/CsX7GNd0/Gemini-Generated-Image-hxuemwhxuemwhxue.jpg" className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 mix-blend-multiply" alt="ブレスレット" />
+                                            <img src="https://i.ibb.co/PsTB0Sbx/image.png" className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 mix-blend-multiply" alt="ブレスレット" />
                                             <div className="absolute bottom-3 left-4 text-white text-xs tracking-[0.2em] font-serif z-20 drop-shadow-md">
                                                 03. 守護の波
                                             </div>
                                         </div>
                                         
                                         <div className="p-6 relative flex flex-col flex-grow">
-                                            <h4 className="text-lg md:text-xl font-bold mb-3 font-calligraphy text-seto-indigo group-hover:text-enishi-red transition-colors">守護・波動ブレス</h4>
-                                            <p className="text-xs md:text-sm text-seto-blue mb-4 leading-relaxed">邪気払い × 浄化祈祷済み</p>
+                                            <h4 className="text-lg md:text-xl font-bold mb-3 font-calligraphy text-seto-indigo group-hover:text-enishi-red transition-colors">あなたに捧げる3時間祈祷</h4>
+                                            <p className="text-xs md:text-sm text-seto-blue mb-4 leading-relaxed">波動調整 × 浄化祈祷</p>
                                             
                                             <div className="mt-auto">
                                                 <div className="flex justify-end items-baseline gap-2 mb-2">
                                                      <span className="text-xs font-bold text-seto-indigo">奉納価格</span>
-                                                     <span className="text-xl md:text-2xl font-bold font-calligraphy text-enishi-red">30,000円</span>
+                                                     <span className="text-xl md:text-2xl font-bold font-calligraphy text-enishi-red">60,000円</span>
                                                 </div>
 
                                                 {/* 折りたたみ説明 */}
                                                 <CollapsibleDescription align="right">
                                                     <p>
-                                                        邪気を払い、持ち主を守護するためのブレスレットです。<br/>
-                                                        厳選された天然石を使用し、瀬戸内の海で浄化した後、祈祷を込めてお届けします。<br/>
-                                                        日常的に身につけることで、周囲のネガティブな影響から身を守り、心の安定を保つサポートをします。<br/>
-                                                        シンプルで日常使いしやすいデザインも魅力です。
+                                                        しょうじ自らが波動調整、浄化祈祷を行います。<br/>
+                                                        <br/>
+                                                        周囲のネガティブな影響から身を守り、心の安定を保つサポートをします。<br/>
+                                                        動画付きはプラス１万円で承っております。
                                                     </p>
                                                 </CollapsibleDescription>
                                             </div>
