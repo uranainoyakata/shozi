@@ -1,535 +1,735 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>しょうじの限定サイト｜強運結び</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>しょうじ｜瀬戸内龍神との接続者</title>
+    <meta name="description" content="瀬戸内に宿る龍神との接続を司る、しょうじ。龍神からのメッセージを受け取り、あなたの運命を本来の流れへと導きます。">
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'shrine-red': '#9e2e2b',
-            'shrine-gold': '#bfa668',
-            'shrine-dark': '#1a1a1a',
-            'shrine-paper': '#fbfaf5',
-            'shrine-gray': '#4a4a4a',
-          },
-          fontFamily: {
-            serif: ['"Shippori Mincho"', 'serif'],
-            calligraphy: ['"Kaisei Tokumin"', 'serif'],
-          },
-          animation: {
-            'fade-in-slow': 'fadeIn 2s ease-out forwards',
-            'slide-up': 'slideUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-          },
-          keyframes: {
-            fadeIn: {
-              '0%': { opacity: '0' },
-              '100%': { opacity: '1' }
-            },
-            slideUp: {
-              '0%': { opacity: '0', transform: 'translateY(40px)' },
-              '100%': { opacity: '1', transform: 'translateY(0)' }
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'shrine-red': '#9e2e2b',
+                        'shrine-gold': '#bfa668',
+                        'shrine-dark': '#1a1a1a',
+                        'shrine-paper': '#fbfaf5',
+                        'shrine-gray': '#4a4a4a',
+                        'dragon-blue': '#1e3a5f',
+                        'dragon-cyan': '#4a9eff',
+                        'ocean-teal': '#2d5f6f',
+                    },
+                    fontFamily: {
+                        serif: ['"Shippori Mincho"', 'serif'],
+                        calligraphy: ['"Kaisei Tokumin"', 'serif'],
+                    },
+                    animation: {
+                        'fade-in-slow': 'fadeIn 2s ease-out forwards',
+                        'slide-up': 'slideUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'dragon-swim': 'dragonSwim 30s linear infinite',
+                        'dragon-swim-2': 'dragonSwim2 35s linear infinite',
+                        'dragon-swim-3': 'dragonSwim3 40s linear infinite',
+                        'wave-flow': 'waveFlow 8s ease-in-out infinite',
+                        'sparkle': 'sparkle 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(40px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        dragonSwim: {
+                            '0%': {
+                                transform: 'translate(-120%, 0) scale(0.8) rotate(0deg)',
+                                opacity: '0'
+                            },
+                            '10%': {
+                                transform: 'translate(-50%, -5%) scale(0.85) rotate(2deg)',
+                                opacity: '0.4'
+                            },
+                            '30%': {
+                                transform: 'translate(10%, -10%) scale(1) rotate(-3deg)',
+                                opacity: '0.6'
+                            },
+                            '50%': {
+                                transform: 'translate(50%, 5%) scale(0.95) rotate(2deg)',
+                                opacity: '0.7'
+                            },
+                            '70%': {
+                                transform: 'translate(90%, -8%) scale(0.9) rotate(-2deg)',
+                                opacity: '0.5'
+                            },
+                            '90%': {
+                                transform: 'translate(130%, 0%) scale(0.8) rotate(0deg)',
+                                opacity: '0.2'
+                            },
+                            '100%': {
+                                transform: 'translate(150%, 0) scale(0.8) rotate(0deg)',
+                                opacity: '0'
+                            }
+                        },
+                        dragonSwim2: {
+                            '0%': {
+                                transform: 'translate(150%, 10%) scale(0.7) rotate(0deg)',
+                                opacity: '0'
+                            },
+                            '10%': {
+                                transform: 'translate(120%, 8%) scale(0.75) rotate(-2deg)',
+                                opacity: '0.3'
+                            },
+                            '30%': {
+                                transform: 'translate(80%, 15%) scale(0.9) rotate(3deg)',
+                                opacity: '0.5'
+                            },
+                            '50%': {
+                                transform: 'translate(40%, 5%) scale(1) rotate(-2deg)',
+                                opacity: '0.6'
+                            },
+                            '70%': {
+                                transform: 'translate(10%, 12%) scale(0.85) rotate(2deg)',
+                                opacity: '0.4'
+                            },
+                            '90%': {
+                                transform: 'translate(-30%, 8%) scale(0.7) rotate(0deg)',
+                                opacity: '0.2'
+                            },
+                            '100%': {
+                                transform: 'translate(-50%, 10%) scale(0.7) rotate(0deg)',
+                                opacity: '0'
+                            }
+                        },
+                        dragonSwim3: {
+                            '0%': {
+                                transform: 'translate(-100%, 20%) scale(0.6) rotate(0deg)',
+                                opacity: '0'
+                            },
+                            '15%': {
+                                transform: 'translate(-20%, 18%) scale(0.7) rotate(3deg)',
+                                opacity: '0.3'
+                            },
+                            '40%': {
+                                transform: 'translate(30%, 25%) scale(0.85) rotate(-2deg)',
+                                opacity: '0.5'
+                            },
+                            '60%': {
+                                transform: 'translate(70%, 15%) scale(0.9) rotate(2deg)',
+                                opacity: '0.6'
+                            },
+                            '85%': {
+                                transform: 'translate(110%, 22%) scale(0.7) rotate(-1deg)',
+                                opacity: '0.3'
+                            },
+                            '100%': {
+                                transform: 'translate(140%, 20%) scale(0.6) rotate(0deg)',
+                                opacity: '0'
+                            }
+                        },
+                        waveFlow: {
+                            '0%, 100%': { transform: 'translateX(0) translateY(0)' },
+                            '50%': { transform: 'translateX(20px) translateY(-10px)' }
+                        },
+                        sparkle: {
+                            '0%, 100%': { opacity: '0', transform: 'scale(0)' },
+                            '50%': { opacity: '1', transform: 'scale(1)' }
+                        }
+                    },
+                    backgroundImage: {
+                        'gold-dust': "url(\"data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23bfa668' fill-opacity='0.15'%3E%3Ccircle cx='10' cy='10' r='1'/%3E%3Ccircle cx='40' cy='30' r='0.5'/%3E%3Ccircle cx='80' cy='60' r='1.5'/%3E%3Ccircle cx='20' cy='80' r='0.5'/%3E%3C/g%3E%3C/svg%3E\")",
+                        'ocean-wave': "url(\"data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 50 Q 25 40, 50 50 T 100 50' stroke='%234a9eff' stroke-width='0.5' fill='none' opacity='0.1'/%3E%3Cpath d='M0 60 Q 25 50, 50 60 T 100 60' stroke='%232d5f6f' stroke-width='0.5' fill='none' opacity='0.1'/%3E%3C/svg%3E\")",
+                    }
+                }
             }
-          },
-          backgroundImage: {
-            'gold-dust': "url(\"data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23bfa668' fill-opacity='0.15'%3E%3Ccircle cx='10' cy='10' r='1'/%3E%3Ccircle cx='40' cy='30' r='0.5'/%3E%3Ccircle cx='80' cy='60' r='1.5'/%3E%3Ccircle cx='20' cy='80' r='0.5'/%3E%3C/g%3E%3C/svg%3E\")",
-          }
         }
-      }
-    }
-  </script>
+    </script>
 
-  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Kaisei+Tokumin:wght@500;700;800&family=Zen+Old+Mincho:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Kaisei+Tokumin:wght@500;700;800&family=Zen+Old+Mincho:wght@400;700;900&display=swap"
+        rel="stylesheet">
 
-  <style>
-    :root {
-      --shrine-red: #9e2e2b;
-      --shrine-gold: #bfa668;
-      --paper: #fbfaf5;
-    }
+    <style>
+        :root {
+            --shrine-red: #9e2e2b;
+            --shrine-gold: #bfa668;
+            --paper: #fbfaf5;
+            --dragon-blue: #1e3a5f;
+            --ocean-teal: #2d5f6f;
+        }
 
-    body {
-      font-family: 'Zen Old Mincho', 'Shippori Mincho', serif;
-      background-color: var(--paper);
-      color: #1a1a1a;
-      overflow-x: hidden;
-      line-height: 2.0;
-    }
+        body {
+            font-family: 'Zen Old Mincho', 'Shippori Mincho', serif;
+            background-color: var(--paper);
+            color: #1a1a1a;
+            overflow-x: hidden;
+            line-height: 2.0;
+        }
 
-    .writing-vertical {
-      writing-mode: vertical-rl;
-      text-orientation: upright;
-      letter-spacing: 0.12em; /* モバイル向けに少し詰める */
-    }
-    
-    @media (min-width: 768px) {
-      .writing-vertical {
-        letter-spacing: 0.15em;
-      }
-    }
+        .writing-vertical {
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            letter-spacing: 0.12em;
+        }
 
-    .washi-bg {
-      background-color: #fbfaf5;
-      background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
-    }
+        @media (min-width: 768px) {
+            .writing-vertical {
+                letter-spacing: 0.15em;
+            }
+        }
 
-    .shrine-border {
-      position: relative;
-      background: #fff;
-      border: 1px solid #e5e5e5;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-    }
-    .shrine-border::before {
-      content: '';
-      position: absolute;
-      top: 4px; left: 4px; right: 4px; bottom: 4px;
-      border: 1px solid var(--shrine-gold);
-      pointer-events: none;
-      opacity: 0.5;
-    }
-    .shrine-border::after {
-      content: '';
-      position: absolute;
-      top: -1px; left: -1px; right: -1px; bottom: -1px;
-      border: 1px solid transparent;
-      pointer-events: none;
-    }
+        .washi-bg {
+            background-color: #fbfaf5;
+            background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+        }
 
-    .gold-text-effect {
-      background: linear-gradient(45deg, #967e45, #d4c28d, #967e45);
-      -webkit-background-clip: text;
-      color: transparent;
-      text-shadow: 0 2px 4px rgba(191, 166, 104, 0.2);
-    }
+        .shrine-border {
+            position: relative;
+            background: #fff;
+            border: 1px solid #e5e5e5;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+        }
 
-    .kasumi-divider {
-      height: 40px;
-      background-image: radial-gradient(circle at center, var(--shrine-gold) 1px, transparent 1.5px);
-      background-size: 8px 8px;
-      opacity: 0.3;
-      mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
-    }
+        .shrine-border::before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            right: 4px;
+            bottom: 4px;
+            border: 1px solid var(--shrine-gold);
+            pointer-events: none;
+            opacity: 0.5;
+        }
 
-    .vermilion-stamp {
-      border: 2px solid var(--shrine-red);
-      color: var(--shrine-red);
-      border-radius: 4px;
-      padding: 0.2em 0.6em;
-      display: inline-block;
-      font-weight: bold;
-      font-family: 'Kaisei Tokumin', serif;
-    }
+        .gold-text-effect {
+            background: linear-gradient(45deg, #967e45, #d4c28d, #967e45);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 4px rgba(191, 166, 104, 0.2);
+        }
 
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-  </style>
+        .dragon-text-effect {
+            background: linear-gradient(135deg, #4a9eff, #2d5f6f, #4a9eff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            filter: drop-shadow(0 0 8px rgba(74, 158, 255, 0.4));
+        }
+
+        .kasumi-divider {
+            height: 40px;
+            background-image: radial-gradient(circle at center, var(--shrine-gold) 1px, transparent 1.5px);
+            background-size: 8px 8px;
+            opacity: 0.3;
+            mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
+        }
+
+        .vermilion-stamp {
+            border: 2px solid var(--shrine-red);
+            color: var(--shrine-red);
+            border-radius: 4px;
+            padding: 0.2em 0.6em;
+            display: inline-block;
+            font-weight: bold;
+            font-family: 'Kaisei Tokumin', serif;
+        }
+
+        .dragon-stamp {
+            border: 2px solid var(--dragon-blue);
+            color: var(--dragon-blue);
+            border-radius: 4px;
+            padding: 0.2em 0.6em;
+            display: inline-block;
+            font-weight: bold;
+            font-family: 'Kaisei Tokumin', serif;
+            background: linear-gradient(135deg, rgba(74, 158, 255, 0.1), rgba(45, 95, 111, 0.1));
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Dragon Animation */
+        .dragon-container {
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            pointer-events: none;
+            filter: drop-shadow(0 0 30px rgba(74, 158, 255, 0.6));
+            will-change: transform, opacity;
+        }
+
+        @media (max-width: 768px) {
+            .dragon-container {
+                width: 200px;
+                height: 200px;
+            }
+        }
+
+        /* Water ripple effect */
+        .water-ripple {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid rgba(74, 158, 255, 0.3);
+            animation: ripple 4s ease-out infinite;
+        }
+
+        @keyframes ripple {
+            0% {
+                width: 0;
+                height: 0;
+                opacity: 0.8;
+            }
+
+            100% {
+                width: 300px;
+                height: 300px;
+                opacity: 0;
+            }
+        }
+
+        /* Sparkle particles */
+        .sparkle-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: radial-gradient(circle, #fff, #4a9eff);
+            border-radius: 50%;
+            animation: sparkle 3s ease-in-out infinite;
+        }
+    </style>
 </head>
 
 <body>
-  <div id="root"></div>
+    <div id="root"></div>
 
-  <script type="text/babel">
-    const { useState, useEffect, useRef } = React;
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
 
-    const Background = () => (
-      <div className="fixed inset-0 pointer-events-none z-0 washi-bg">
-        <div className="absolute inset-0 bg-gold-dust opacity-30"></div>
-      </div>
-    );
+        const Background = () => {
+            const [sparkles, setSparkles] = useState([]);
 
-    const Opening = ({ onComplete }) => {
-      const [stage, setStage] = useState(0);
+            useEffect(() => {
+                const newSparkles = Array.from({ length: 30 }, (_, i) => ({
+                    id: i,
+                    left: Math.random() * 100,
+                    top: Math.random() * 100,
+                    delay: Math.random() * 3,
+                }));
+                setSparkles(newSparkles);
+            }, []);
 
-      useEffect(() => {
-        setTimeout(() => setStage(1), 500);
-        setTimeout(() => setStage(2), 2500);
-        setTimeout(() => onComplete(), 3200);
-      }, []);
+            return (
+                <div className="fixed inset-0 pointer-events-none z-0 washi-bg">
+                    <div className="absolute inset-0 bg-ocean-wave opacity-20"></div>
+                    <div className="absolute inset-0 bg-gold-dust opacity-30"></div>
 
-      if (stage === 3) return null;
-
-      return (
-        <div className={`fixed inset-0 z-50 flex items-center justify-center transition-all duration-1000 ${stage === 2 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`} style={{ backgroundColor: "#fbfaf5" }}>
-          <div className={`absolute inset-0 bg-shrine-red transition-transform duration-[1500ms] ease-in-out origin-top ${stage >= 1 ? 'scale-y-0' : 'scale-y-100'}`}></div>
-          <div className={`relative z-10 flex flex-col items-center transition-opacity duration-1000 ${stage >= 1 ? 'opacity-100' : 'opacity-0'}`}>
-            <div className="text-shrine-dark font-calligraphy text-2xl md:text-4xl tracking-[0.3em] md:tracking-[0.5em] border-y border-shrine-gold py-4 px-6 md:px-8">
-              しょうじの書
-            </div>
-          </div>
-        </div>
-      );
-    };
-
-    const SectionPhoto = ({ src, alt }) => (
-      <figure className="mt-6 md:mt-8 relative p-1 bg-white border border-shrine-gold/30 shadow-sm">
-        <div className="aspect-[16/9] w-full relative">
-          <img src={src} alt={alt} className="h-full w-full object-cover" loading="lazy" />
-          <div className="absolute top-2 left-2 w-3 h-3 md:w-4 md:h-4 border-t border-l border-white/80"></div>
-          <div className="absolute top-2 right-2 w-3 h-3 md:w-4 md:h-4 border-t border-r border-white/80"></div>
-          <div className="absolute bottom-2 left-2 w-3 h-3 md:w-4 md:h-4 border-b border-l border-white/80"></div>
-          <div className="absolute bottom-2 right-2 w-3 h-3 md:w-4 md:h-4 border-b border-r border-white/80"></div>
-        </div>
-      </figure>
-    );
-
-    const CollapsibleDescription = ({ children }) => {
-      const [isOpen, setIsOpen] = useState(false);
-      return (
-        <div className="mt-5 md:mt-6 w-full flex flex-col items-start">
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="group flex items-center gap-3 text-sm md:text-base text-shrine-dark font-bold border-b border-shrine-gold/50 pb-1 hover:text-shrine-red transition-colors"
-          >
-            <span className={`w-2 h-2 bg-shrine-red transform rotate-45 transition-transform duration-300 ${isOpen ? 'rotate-0' : ''}`}></span>
-            {isOpen ? '詳細を閉じる' : '詳細を拝見する'}
-          </button>
-          <div className={`w-full grid transition-[grid-template-rows] duration-500 ease-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
-            <div className="overflow-hidden">
-              <div className="pt-4 pb-2 text-sm md:text-base leading-loose text-justify text-shrine-gray">
-                {children}
-              </div>
-            </div>
-          </div>
-        </div>
-      );
-    };
-
-    const App = () => {
-      const [loading, setLoading] = useState(true);
-      const itemsRef = useRef([]);
-
-      useEffect(() => {
-        if (loading) return;
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('animate-slide-up');
-              observer.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.1 });
-        itemsRef.current.forEach(el => el && observer.observe(el));
-      }, [loading]);
-
-      const addToRefs = (el) => {
-        if (el && !itemsRef.current.includes(el)) itemsRef.current.push(el);
-      };
-
-      return (
-        <React.Fragment>
-          <Opening onComplete={() => setLoading(false)} />
-
-          <div className={`min-h-screen w-full relative overflow-hidden transition-opacity duration-1000 ${loading ? 'opacity-0' : 'opacity-100'}`}>
-            <Background />
-
-            {/* --- Header --- */}
-            <header className="relative z-10 w-full flex flex-col items-center pt-16 pb-16 md:pt-28 md:pb-32 px-5">
-              
-              {/* ロゴ: モバイルで少し小さく */}
-              <div className="mb-8 md:mb-12 opacity-80 animate-fade-in-slow transform scale-90 md:scale-100">
-                <svg width="80" height="80" viewBox="0 0 100 100" className="stroke-shrine-dark fill-none stroke-[1.5]">
-                  <circle cx="50" cy="50" r="40" className="stroke-shrine-gold" />
-                  <path d="M50 10 L50 90 M10 50 L90 50" className="stroke-shrine-dark/20" />
-                  <rect x="35" y="35" width="30" height="30" transform="rotate(45 50 50)" className="stroke-shrine-red" />
-                </svg>
-              </div>
-
-              {/* キャッチコピーエリア: 高さ調整 */}
-              <div className="max-w-4xl w-full flex flex-row-reverse justify-center gap-6 md:gap-20 h-[500px] md:h-[70vh]">
-                {/* メインコピー: モバイルでサイズ調整（3xl） */}
-                <h1 className="writing-vertical text-3xl md:text-7xl font-bold font-calligraphy tracking-[0.12em] md:tracking-[0.15em] leading-loose md:leading-relaxed text-shrine-dark drop-shadow-sm flex items-start h-full py-4">
-                  <span className="animate-slide-up" style={{animationDelay: '0.2s'}}>運命を</span>
-                  <span className="mt-12 md:mt-16 text-shrine-red animate-slide-up" style={{animationDelay: '0.6s'}}>結び直す</span>
-                </h1>
-
-                {/* サブコピー */}
-                <div className="flex flex-col items-center pt-8 md:pt-10 h-full">
-                  <div className="writing-vertical text-xs md:text-xl font-medium tracking-widest text-shrine-gray animate-slide-up" style={{animationDelay: '1s'}}>
-                    瀬戸内の凪が<br/>
-                    心を静める
-                  </div>
-                  <div className="flex-1 w-px bg-gradient-to-b from-shrine-gold to-transparent mt-6 md:mt-8 opacity-50"></div>
+                    {/* Sparkle particles */}
+                    {sparkles.map(sparkle => (
+                        <div
+                            key={sparkle.id}
+                            className="sparkle-particle"
+                            style={{
+                                left: `${sparkle.left}%`,
+                                top: `${sparkle.top}%`,
+                                animationDelay: `${sparkle.delay}s`,
+                            }}
+                        />
+                    ))}
                 </div>
-              </div>
-              
-              <div className="absolute bottom-6 md:bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center opacity-60">
-                <span className="text-[10px] md:text-xs font-serif tracking-widest mb-2 text-shrine-gold">拝見する</span>
-                <div className="w-px h-8 md:h-12 bg-shrine-dark"></div>
-              </div>
-            </header>
+            );
+        };
 
-            {/* --- Profile --- */}
-            <section className="relative z-10 max-w-4xl mx-auto px-5 mb-24 md:mb-32">
-              <div ref={addToRefs} className="shrine-border p-6 md:p-16 opacity-0">
-                <div className="flex flex-col md:flex-row gap-8 md:gap-16 items-center md:items-start">
-                  {/* 写真: モバイルで少し小さく */}
-                  <div className="w-40 h-52 md:w-64 md:h-80 shrink-0 relative bg-gray-200 border-4 border-white shadow-md">
-                     <img src="https://i.ibb.co/TMGHVgRm/image.jpg" alt="しょうじ" className="w-full h-full object-cover sepia-[.2]" />
-                     <div className="absolute -bottom-3 -right-3 md:-bottom-4 md:-right-4 w-12 h-12 md:w-20 md:h-20 border-r-2 border-b-2 border-shrine-gold opacity-60"></div>
-                  </div>
+        const Opening = ({ onComplete }) => {
+            const [stage, setStage] = useState(0);
 
-                  <div className="flex-1 pt-2 md:pt-4 text-center md:text-left">
-                    <h2 className="text-xl md:text-3xl font-bold mb-5 md:mb-6 font-calligraphy flex flex-col md:flex-row items-center justify-center md:justify-start gap-3 md:gap-4">
-                      <span className="vermilion-stamp text-base md:text-lg">縁結び師</span>
-                      <span>しょうじ</span>
-                    </h2>
-                    
-                    <div className="space-y-5 md:space-y-6 text-sm md:text-base leading-loose font-serif text-shrine-dark text-left">
-                      <p>
-                        荒波のような日々に疲れた心を、<br className="hidden md:block"/>
-                        瀬戸内の凪（なぎ）のように静めるお手伝いをしております。
-                      </p>
-                      <p>
-                        見えない縁（えにし）の糸は、時に絡まり、時に解け。<br/>
-                        本来あるべき<strong className="text-shrine-red font-bold border-b border-shrine-red/30 mx-1">「結び」</strong>を取り戻すことで、<br/>
-                        人生は再び豊かな流れを取り戻します。
-                      </p>
-                      <p className="text-xs text-shrine-gray mt-6 md:mt-8 text-right">
-                        合掌
-                      </p>
+            useEffect(() => {
+                setTimeout(() => setStage(1), 500);
+                setTimeout(() => setStage(2), 2500);
+                setTimeout(() => onComplete(), 3200);
+            }, []);
+
+            if (stage === 3) return null;
+
+            return (
+                <div className={`fixed inset-0 z-50 flex items-center justify-center transition-all duration-1000 ${stage === 2 ? 'opacity-0 pointer-events-none' : 'opacity-100'}`} style={{ backgroundColor: "#fbfaf5" }}>
+                    <div className={`absolute inset-0 bg-gradient-to-b from-dragon-blue to-ocean-teal transition-transform duration-[1500ms] ease-in-out origin-top ${stage >= 1 ? 'scale-y-0' : 'scale-y-100'}`}></div>
+                    <div className={`relative z-10 flex flex-col items-center transition-opacity duration-1000 ${stage >= 1 ? 'opacity-100' : 'opacity-0'}`}>
+                        <div className="text-shrine-dark font-calligraphy text-2xl md:text-4xl tracking-[0.3em] md:tracking-[0.5em] border-y border-dragon-cyan py-4 px-6 md:px-8">
+                            <span className="dragon-text-effect">龍神接続</span>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
-            </section>
+            );
+        };
 
-            {/* --- Menu Index --- */}
-            <section className="relative z-10 max-w-5xl mx-auto px-5 pb-32 md:pb-40 space-y-20 md:space-y-24">
-              
-              <div ref={addToRefs} className="text-center opacity-0 space-y-3 md:space-y-4">
-                <h3 className="text-2xl md:text-4xl font-calligraphy font-bold text-shrine-dark">
-                   <span className="inline-block border-b-2 border-shrine-red pb-2">特別授与品のご案内</span>
-                </h3>
-                <p className="text-shrine-gray text-xs md:text-base font-serif">
-                  今のあなたに必要な「結び」をお選びください。
-                </p>
-              </div>
-
-              {/* 01 鑑定 */}
-              <article ref={addToRefs} className="flex flex-col md:flex-row gap-6 md:gap-12 opacity-0">
-                <div className="md:w-1/2">
-                   <SectionPhoto src="https://i.ibb.co/pTz16RJ/image.png" alt="特別本鑑定" />
+        const SectionPhoto = ({ src, alt }) => (
+            <figure className="mt-6 md:mt-8 relative p-1 bg-white border border-shrine-gold/30 shadow-sm">
+                <div className="aspect-[16/9] w-full relative">
+                    <img src={src} alt={alt} className="h-full w-full object-cover" loading="lazy" />
+                    <div className="absolute top-2 left-2 w-3 h-3 md:w-4 md:h-4 border-t border-l border-white/80"></div>
+                    <div className="absolute top-2 right-2 w-3 h-3 md:w-4 md:h-4 border-t border-r border-white/80"></div>
+                    <div className="absolute bottom-2 left-2 w-3 h-3 md:w-4 md:h-4 border-b border-l border-white/80"></div>
+                    <div className="absolute bottom-2 right-2 w-3 h-3 md:w-4 md:h-4 border-b border-r border-white/80"></div>
                 </div>
-                <div className="md:w-1/2 flex flex-col justify-center">
-                  <div className="flex items-center gap-3 mb-3 md:mb-4 mt-2 md:mt-0">
-                    <span className="text-shrine-gold font-calligraphy text-3xl md:text-4xl opacity-40">壱</span>
-                    <h4 className="text-lg md:text-2xl font-bold font-calligraphy border-l-4 border-shrine-red pl-3 md:pl-4 py-1">
-                      特別本鑑定
-                    </h4>
-                  </div>
-                  <p className="text-shrine-gray text-sm leading-relaxed mb-5 md:mb-6">
-                    生年月日と姓名から運命の地図を紐解き、<br className="hidden md:block"/>いま必要な“結び直し”を示します。
-                  </p>
-                  
-                  <div className="bg-white/50 p-5 md:p-6 border border-shrine-gold/20 mb-5 md:mb-6 rounded-sm">
-                    <dl className="space-y-3 text-sm">
-                      <div className="flex justify-between border-b border-dashed border-gray-300 pb-2">
-                        <dt className="font-bold">本鑑定（文章）</dt>
-                        <dd>四,〇〇〇円</dd>
-                      </div>
-                      <div className="flex justify-between border-b border-dashed border-gray-300 pb-2">
-                        <dt className="font-bold">電話鑑定（三〇分）</dt>
-                        <dd>一〇,〇〇〇円</dd>
-                      </div>
-                    </dl>
-                  </div>
+            </figure>
+        );
 
-                  <CollapsibleDescription>
-                    <p>
-                      あなたの生年月日と姓名から、生まれ持った運命の地図を紐解きます。<br/>
-                      現状の悩みに対する具体的な整え方と、今後3ヶ月の流れをお伝えします。<br/>
-                      文章でお届けするため、必要な時に何度でも読み返せます。
-                    </p>
-                  </CollapsibleDescription>
-                  <div className="mt-6 md:mt-8 text-right">
-                     <a href="#line" className="inline-block text-shrine-red font-bold border-b border-shrine-red hover:bg-shrine-red/5 transition-colors px-2 py-1 text-sm md:text-base">申し込む →</a>
-                  </div>
-                </div>
-              </article>
-
-              <div className="kasumi-divider"></div>
-
-              {/* 02 アイテム */}
-              <article ref={addToRefs} className="flex flex-col md:flex-row-reverse gap-6 md:gap-12 opacity-0">
-                <div className="md:w-1/2">
-                   <SectionPhoto src="https://i.ibb.co/CsX7GNd0/Gemini-Generated-Image-hxuemwhxuemwhxue.jpg" alt="アイテム作成" />
-                </div>
-                <div className="md:w-1/2 flex flex-col justify-center">
-                  <div className="flex items-center gap-3 mb-3 md:mb-4 mt-2 md:mt-0">
-                    <span className="text-shrine-gold font-calligraphy text-3xl md:text-4xl opacity-40">弐</span>
-                    <h4 className="text-lg md:text-2xl font-bold font-calligraphy border-l-4 border-shrine-red pl-3 md:pl-4 py-1">
-                      御守り・アイテム作成
-                    </h4>
-                  </div>
-                  <p className="text-shrine-gray text-sm leading-relaxed mb-5 md:mb-6">
-                    波動調整ブレスレットと、秘伝アフォメーションを<br className="hidden md:block"/>整えてお届けします。
-                  </p>
-                  
-                  <div className="bg-white/50 p-5 md:p-6 border border-shrine-gold/20 mb-5 md:mb-6 rounded-sm">
-                    <dl className="space-y-3 text-sm">
-                      <div className="flex justify-between border-b border-dashed border-gray-300 pb-2">
-                        <dt className="font-bold">初穂料目安</dt>
-                        <dd>一二〇,〇〇〇円</dd>
-                      </div>
-                    </dl>
-                  </div>
-
-                  <CollapsibleDescription>
-                    <p>
-                      【完全受注案内】<br/>
-                      パワーストーン、ブレスレット、アクセサリーなどあなたの生活スタイルに合わせて提案。<br/>
-                      しょうじがあなたに合わせて瀬戸内の波動を「31時間」込めた上でお届け致します。
-                    </p>
-                  </CollapsibleDescription>
-                  <div className="mt-6 md:mt-8 text-right">
-                     <a href="#line" className="inline-block text-shrine-red font-bold border-b border-shrine-red hover:bg-shrine-red/5 transition-colors px-2 py-1 text-sm md:text-base">申し込む →</a>
-                  </div>
-                </div>
-              </article>
-
-              <div className="kasumi-divider"></div>
-
-              {/* 03 言霊 */}
-              <article ref={addToRefs} className="flex flex-col md:flex-row gap-6 md:gap-12 opacity-0">
-                <div className="md:w-1/2">
-                   <SectionPhoto src="https://i.ibb.co/0p4rBQMM/Gemini-Generated-Image-imfrlrimfrlrimfr.jpg" alt="言霊実践" />
-                </div>
-                <div className="md:w-1/2 flex flex-col justify-center">
-                  <div className="flex items-center gap-3 mb-3 md:mb-4 mt-2 md:mt-0">
-                    <span className="text-shrine-gold font-calligraphy text-3xl md:text-4xl opacity-40">参</span>
-                    <h4 className="text-lg md:text-2xl font-bold font-calligraphy border-l-4 border-shrine-red pl-3 md:pl-4 py-1">
-                      言霊実践
-                    </h4>
-                  </div>
-                  <p className="text-shrine-gray text-sm leading-relaxed mb-5 md:mb-6">
-                    あなた専用の真言（マントラ）を整え、<br className="hidden md:block"/>二一日の実践を支えます。
-                  </p>
-                  
-                  <div className="bg-white/50 p-5 md:p-6 border border-shrine-gold/20 mb-5 md:mb-6 rounded-sm">
-                    <dl className="space-y-3 text-sm">
-                      <div className="flex justify-between border-b border-dashed border-gray-300 pb-2">
-                        <dt className="font-bold">初穂料目安</dt>
-                        <dd>八〇,〇〇〇円</dd>
-                      </div>
-                    </dl>
-                  </div>
-
-                  <CollapsibleDescription>
-                    <p>
-                      言葉には現実を創る力があります。<br/>
-                      あなた専用に紡がれた「真言（マントラ）」を毎日唱えることで、潜在意識を書き換え、整った流れへと導きます。
-                    </p>
-                  </CollapsibleDescription>
-                  <div className="mt-6 md:mt-8 text-right">
-                     <a href="#line" className="inline-block text-shrine-red font-bold border-b border-shrine-red hover:bg-shrine-red/5 transition-colors px-2 py-1 text-sm md:text-base">申し込む →</a>
-                  </div>
-                </div>
-              </article>
-              
-              <div className="kasumi-divider"></div>
-
-               {/* 04 祈祷 */}
-               <article ref={addToRefs} className="flex flex-col md:flex-row-reverse gap-6 md:gap-12 opacity-0">
-                <div className="md:w-1/2">
-                   <SectionPhoto src="https://i.ibb.co/PsTB0Sbx/image.png" alt="祈祷" />
-                </div>
-                <div className="md:w-1/2 flex flex-col justify-center">
-                  <div className="flex items-center gap-3 mb-3 md:mb-4 mt-2 md:mt-0">
-                    <span className="text-shrine-gold font-calligraphy text-3xl md:text-4xl opacity-40">四</span>
-                    <h4 className="text-lg md:text-2xl font-bold font-calligraphy border-l-4 border-shrine-red pl-3 md:pl-4 py-1">
-                      波動調整・浄化祈祷
-                    </h4>
-                  </div>
-                  <p className="text-shrine-gray text-sm leading-relaxed mb-5 md:mb-6">
-                    しょうじ自らが波動調整、浄化祈祷を行い、<br className="hidden md:block"/>いま必要な静けさを整えます。
-                  </p>
-                  
-                  <div className="bg-white/50 p-5 md:p-6 border border-shrine-gold/20 mb-5 md:mb-6 rounded-sm">
-                    <dl className="space-y-3 text-sm">
-                      <div className="flex justify-between border-b border-dashed border-gray-300 pb-2">
-                        <dt className="font-bold">初穂料目安</dt>
-                        <dd>六〇,〇〇〇円</dd>
-                      </div>
-                    </dl>
-                  </div>
-
-                  <CollapsibleDescription>
-                    <p>
-                      周囲のネガティブな影響から身を守り、心の安定を保つサポートをします。<br/>
-                      動画付きは追加奉納で承っております。
-                    </p>
-                  </CollapsibleDescription>
-                  <div className="mt-6 md:mt-8 text-right">
-                     <a href="#line" className="inline-block text-shrine-red font-bold border-b border-shrine-red hover:bg-shrine-red/5 transition-colors px-2 py-1 text-sm md:text-base">申し込む →</a>
-                  </div>
-                </div>
-              </article>
-
-              {/* LINE CTA */}
-              <div id="line" ref={addToRefs} className="opacity-0 translate-y-8 mt-16 md:mt-20">
-                <div className="shrine-border p-8 md:p-16 text-center relative overflow-hidden">
-                  <div className="relative z-10">
-                    <h3 className="text-xl md:text-3xl font-bold font-calligraphy mb-4 md:mb-6">
-                      <span className="gold-text-effect">お申し込み・お問い合わせ</span>
-                    </h3>
-                    <p className="text-sm md:text-base leading-loose mb-8 md:mb-10 text-shrine-gray">
-                      鑑定およびご案内のお申し込みは、<br className="md:hidden"/>公式LINEにて承ります。<br/>
-                      ご希望のメニュー名を添えて、<br className="md:hidden"/>静かに一言お送りください。
-                    </p>
-
-                    <a
-                      href="https://lin.ee/LB2rF3Z"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-3 w-full md:w-auto px-8 md:px-10 py-4 md:py-5 bg-shrine-red text-white hover:bg-[#852321] transition-colors shadow-lg rounded-sm"
+        const CollapsibleDescription = ({ children }) => {
+            const [isOpen, setIsOpen] = useState(false);
+            return (
+                <div className="mt-5 md:mt-6 w-full flex flex-col items-start">
+                    <button
+                        onClick={() => setIsOpen(!isOpen)}
+                        className="group flex items-center gap-3 text-sm md:text-base text-shrine-dark font-bold border-b border-shrine-gold/50 pb-1 hover:text-dragon-cyan transition-colors"
                     >
-                      <span className="tracking-widest font-bold text-base md:text-lg">公式LINEへ</span>
-                      <span className="text-sm">→</span>
-                    </a>
-                    
-                    <p className="mt-6 md:mt-8 text-[10px] md:text-xs text-shrine-gold tracking-widest">OFFICIAL LINE ACCOUNT</p>
-                  </div>
-                  {/* 背景の透かし */}
-                  <div className="absolute -right-10 -bottom-10 opacity-5 pointer-events-none">
-                     <svg width="200" height="200" viewBox="0 0 100 100">
-                       <circle cx="50" cy="50" r="40" stroke="black" strokeWidth="5" fill="none"/>
-                     </svg>
-                  </div>
+                        <span className={`w-2 h-2 bg-dragon-cyan transform rotate-45 transition-transform duration-300 ${isOpen ? 'rotate-0' : ''}`}></span>
+                        {isOpen ? '詳細を閉じる' : '詳細を拝見する'}
+                    </button>
+                    <div className={`w-full grid transition-[grid-template-rows] duration-500 ease-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
+                        <div className="overflow-hidden">
+                            <div className="pt-4 pb-2 text-sm md:text-base leading-loose text-justify text-shrine-gray">
+                                {children}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
+            );
+        };
 
-            </section>
+        const App = () => {
+            const [loading, setLoading] = useState(true);
+            const itemsRef = useRef([]);
 
-            {/* --- Footer --- */}
-            <footer className="py-16 md:py-20 bg-shrine-dark text-shrine-paper text-center relative z-10">
-              <div className="flex flex-col items-center justify-center space-y-6 md:space-y-8">
-                <div className="w-[1px] h-12 md:h-16 bg-shrine-gold opacity-30"></div>
-                <div className="font-calligraphy text-xl md:text-2xl tracking-[0.2em]">しょうじの書</div>
-                <p className="text-[10px] md:text-xs font-serif tracking-widest opacity-60 leading-loose">
-                  潮の満ち引きが<br/>
-                  再び扉を開くまで
-                </p>
-                <div className="text-[10px] tracking-widest opacity-30 pt-6">
-                  © Shoji Enishi Reading.
-                </div>
-              </div>
-            </footer>
+            useEffect(() => {
+                if (loading) return;
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('animate-slide-up');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+                itemsRef.current.forEach(el => el && observer.observe(el));
+            }, [loading]);
 
-          </div>
-        </React.Fragment>
-      );
-    };
+            const addToRefs = (el) => {
+                if (el && !itemsRef.current.includes(el)) itemsRef.current.push(el);
+            };
 
-    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
-  </script>
+            return (
+                <React.Fragment>
+                    <Opening onComplete={() => setLoading(false)} />
+
+                    <div className={`min-h-screen w-full relative overflow-hidden transition-opacity duration-1000 ${loading ? 'opacity-0' : 'opacity-100'}`}>
+                        <Background />
+
+                        {/* --- Header --- */}
+                        <header className="relative z-10 w-full flex flex-col items-center pt-16 pb-16 md:pt-28 md:pb-32 px-5">
+
+                            {/* ロゴ: 龍神モチーフ */}
+                            <div className="mb-8 md:mb-12 opacity-80 animate-fade-in-slow transform scale-90 md:scale-100">
+                                <svg width="80" height="80" viewBox="0 0 100 100" className="stroke-dragon-blue fill-none stroke-[1.5]">
+                                    <circle cx="50" cy="50" r="40" className="stroke-dragon-cyan" />
+                                    <path d="M50 10 L50 90 M10 50 L90 50" className="stroke-ocean-teal/30" />
+                                    <circle cx="50" cy="50" r="25" className="stroke-shrine-gold" />
+                                    <path d="M 30 50 Q 40 40, 50 50 T 70 50" className="stroke-dragon-blue stroke-[2]" />
+                                </svg>
+                            </div>
+
+                            {/* キャッチコピーエリア */}
+                            <div className="max-w-4xl w-full flex flex-row-reverse justify-center gap-6 md:gap-20 h-[500px] md:h-[70vh]">
+                                <h1 className="writing-vertical text-3xl md:text-7xl font-bold font-calligraphy tracking-[0.12em] md:tracking-[0.15em] leading-loose md:leading-relaxed text-shrine-dark drop-shadow-sm flex items-start h-full py-4">
+                                    <span className="animate-slide-up" style={{ animationDelay: '0.2s' }}>龍神と</span>
+                                    <span className="mt-12 md:mt-16 dragon-text-effect animate-slide-up" style={{ animationDelay: '0.6s' }}>繋がる</span>
+                                </h1>
+
+                                <div className="flex flex-col items-center pt-8 md:pt-10 h-full">
+                                    <div className="writing-vertical text-xs md:text-xl font-medium tracking-widest text-shrine-gray animate-slide-up" style={{ animationDelay: '1s' }}>
+                                        しょうじが<br />
+                                        龍神と繋ぐ
+                                    </div>
+                                    <div className="flex-1 w-px bg-gradient-to-b from-dragon-cyan via-shrine-gold to-transparent mt-6 md:mt-8 opacity-50"></div>
+                                </div>
+                            </div>
+
+                            <div className="absolute bottom-6 md:bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center opacity-60">
+                                <span className="text-[10px] md:text-xs font-serif tracking-widest mb-2 text-dragon-cyan">拝見する</span>
+                                <div className="w-px h-8 md:h-12 bg-gradient-to-b from-dragon-cyan to-shrine-gold"></div>
+                            </div>
+                        </header>
+
+                        {/* --- Profile --- */}
+                        <section className="relative z-10 max-w-4xl mx-auto px-5 mb-24 md:mb-32">
+                            <div ref={addToRefs} className="shrine-border p-6 md:p-16 opacity-0">
+                                <div className="flex flex-col md:flex-row gap-8 md:gap-16 items-center md:items-start">
+                                    <div className="w-40 h-52 md:w-64 md:h-80 shrink-0 relative bg-gray-200 border-4 border-white shadow-md">
+                                        <img src="https://i.ibb.co/TMGHVgRm/image.jpg" alt="しょうじ" className="w-full h-full object-cover sepia-[.2]" />
+                                        <div className="absolute -bottom-3 -right-3 md:-bottom-4 md:-right-4 w-12 h-12 md:w-20 md:h-20 border-r-2 border-b-2 border-dragon-cyan opacity-60"></div>
+                                    </div>
+
+                                    <div className="flex-1 pt-2 md:pt-4 text-center md:text-left">
+                                        <h2 className="text-xl md:text-3xl font-bold mb-5 md:mb-6 font-calligraphy flex flex-col md:flex-row items-center justify-center md:justify-start gap-3 md:gap-4">
+                                            <span className="dragon-stamp text-base md:text-lg">龍神接続者</span>
+                                            <span>しょうじ</span>
+                                        </h2>
+
+                                        <div className="space-y-5 md:space-y-6 text-sm md:text-base leading-loose font-serif text-shrine-dark text-left">
+                                            <p>
+                                                瀬戸内の海に宿る龍神と、人を繋ぐ。<br className="hidden md:block" />
+                                                それが私の役目です。
+                                            </p>
+                                            <p>
+                                                龍神からのメッセージを受け取り、<br />
+                                                あなたの運命の糸を<strong className="text-dragon-cyan font-bold border-b border-dragon-cyan/30 mx-1">本来の流れ</strong>へと結び直します。<br />
+                                                荒波のような日々も、龍神との接続により静かな凪へと変わります。
+                                            </p>
+                                            <p className="text-xs text-shrine-gray mt-6 md:mt-8 text-right">
+                                                合掌
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* --- Menu Index --- */}
+                        <section className="relative z-10 max-w-5xl mx-auto px-5 pb-32 md:pb-40 space-y-20 md:space-y-24">
+
+                            <div ref={addToRefs} className="text-center opacity-0 space-y-3 md:space-y-4">
+                                <h3 className="text-2xl md:text-4xl font-calligraphy font-bold text-shrine-dark">
+                                    <span className="inline-block border-b-2 border-dragon-cyan pb-2 dragon-text-effect">龍神接続メニュー</span>
+                                </h3>
+                                <p className="text-shrine-gray text-xs md:text-base font-serif">
+                                    しょうじを通じて龍神と繋がり、今のあなたに必要な「導き」をお受け取りください。
+                                </p>
+                            </div>
+
+                            {/* 01 鑑定 */}
+                            <article ref={addToRefs} className="flex flex-col md:flex-row gap-6 md:gap-12 opacity-0">
+                                <div className="md:w-1/2">
+                                    <SectionPhoto src="https://i.ibb.co/pTz16RJ/image.png" alt="龍神本鑑定" />
+                                </div>
+                                <div className="md:w-1/2 flex flex-col justify-center">
+                                    <div className="flex items-center gap-3 mb-3 md:mb-4 mt-2 md:mt-0">
+                                        <span className="text-dragon-cyan font-calligraphy text-3xl md:text-4xl opacity-40">壱</span>
+                                        <h4 className="text-lg md:text-2xl font-bold font-calligraphy border-l-4 border-dragon-cyan pl-3 md:pl-4 py-1">
+                                            龍神接続鑑定
+                                        </h4>
+                                    </div>
+                                    <p className="text-shrine-gray text-sm leading-relaxed mb-5 md:mb-6">
+                                        しょうじが龍神と接続し、<br className="hidden md:block" />あなたへのメッセージを受け取ります。
+                                    </p>
+
+                                    <div className="bg-white/50 p-5 md:p-6 border border-dragon-cyan/20 mb-5 md:mb-6 rounded-sm">
+                                        <dl className="space-y-3 text-sm">
+                                            <div className="flex justify-between border-b border-dashed border-gray-300 pb-2">
+                                                <dt className="font-bold">本鑑定（文章）</dt>
+                                                <dd>四,〇〇〇円</dd>
+                                            </div>
+                                            <div className="flex justify-between border-b border-dashed border-gray-300 pb-2">
+                                                <dt className="font-bold">電話鑑定（三〇分）</dt>
+                                                <dd>一〇,〇〇〇円</dd>
+                                            </div>
+                                        </dl>
+                                    </div>
+
+                                    <CollapsibleDescription>
+                                        <p>
+                                            しょうじが瀬戸内の龍神と接続し、あなたへのメッセージを受け取ります。<br />
+                                            生年月日と姓名から運命の流れを読み解き、龍神が示す道筋をお伝えします。<br />
+                                            今後3ヶ月の運気の流れと、具体的な行動指針を文章でお届けします。
+                                        </p>
+                                    </CollapsibleDescription>
+                                    <div className="mt-6 md:mt-8 text-right">
+                                        <a href="#line" className="inline-block text-dragon-cyan font-bold border-b border-dragon-cyan hover:bg-dragon-cyan/5 transition-colors px-2 py-1 text-sm md:text-base">申し込む →</a>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <div className="kasumi-divider"></div>
+
+                            {/* 02 アイテム */}
+                            <article ref={addToRefs} className="flex flex-col md:flex-row-reverse gap-6 md:gap-12 opacity-0">
+                                <div className="md:w-1/2">
+                                    <SectionPhoto src="https://i.ibb.co/CsX7GNd0/Gemini-Generated-Image-hxuemwhxuemwhxue.jpg" alt="龍神アイテム" />
+                                </div>
+                                <div className="md:w-1/2 flex flex-col justify-center">
+                                    <div className="flex items-center gap-3 mb-3 md:mb-4 mt-2 md:mt-0">
+                                        <span className="text-dragon-cyan font-calligraphy text-3xl md:text-4xl opacity-40">弐</span>
+                                        <h4 className="text-lg md:text-2xl font-bold font-calligraphy border-l-4 border-dragon-cyan pl-3 md:pl-4 py-1">
+                                            龍神波動アイテム
+                                        </h4>
+                                    </div>
+                                    <p className="text-shrine-gray text-sm leading-relaxed mb-5 md:mb-6">
+                                        龍神と接続し、その波動を込めたアイテムを<br className="hidden md:block" />あなた専用に作成いたします。
+                                    </p>
+
+                                    <div className="bg-white/50 p-5 md:p-6 border border-dragon-cyan/20 mb-5 md:mb-6 rounded-sm">
+                                        <dl className="space-y-3 text-sm">
+                                            <div className="flex justify-between border-b border-dashed border-gray-300 pb-2">
+                                                <dt className="font-bold">初穂料目安</dt>
+                                                <dd>一二〇,〇〇〇円</dd>
+                                            </div>
+                                        </dl>
+                                    </div>
+
+                                    <CollapsibleDescription>
+                                        <p>
+                                            【完全受注制作】<br />
+                                            しょうじが龍神と接続し、あなたに必要な波動を「31時間」かけて込めます。<br />
+                                            ブレスレット、アクセサリーなど、あなたの生活に寄り添う形でお届けします。
+                                        </p>
+                                    </CollapsibleDescription>
+                                    <div className="mt-6 md:mt-8 text-right">
+                                        <a href="#line" className="inline-block text-dragon-cyan font-bold border-b border-dragon-cyan hover:bg-dragon-cyan/5 transition-colors px-2 py-1 text-sm md:text-base">申し込む →</a>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <div className="kasumi-divider"></div>
+
+                            {/* 03 言霊 */}
+                            <article ref={addToRefs} className="flex flex-col md:flex-row gap-6 md:gap-12 opacity-0">
+                                <div className="md:w-1/2">
+                                    <SectionPhoto src="https://i.ibb.co/0p4rBQMM/Gemini-Generated-Image-imfrlrimfrlrimfr.jpg" alt="龍神言霊" />
+                                </div>
+                                <div className="md:w-1/2 flex flex-col justify-center">
+                                    <div className="flex items-center gap-3 mb-3 md:mb-4 mt-2 md:mt-0">
+                                        <span className="text-dragon-cyan font-calligraphy text-3xl md:text-4xl opacity-40">参</span>
+                                        <h4 className="text-lg md:text-2xl font-bold font-calligraphy border-l-4 border-dragon-cyan pl-3 md:pl-4 py-1">
+                                            龍神言霊授与
+                                        </h4>
+                                    </div>
+                                    <p className="text-shrine-gray text-sm leading-relaxed mb-5 md:mb-6">
+                                        龍神から授かったあなた専用の言霊を、<br className="hidden md:block" />二一日間の実践とともにお届けします。
+                                    </p>
+
+                                    <div className="bg-white/50 p-5 md:p-6 border border-dragon-cyan/20 mb-5 md:mb-6 rounded-sm">
+                                        <dl className="space-y-3 text-sm">
+                                            <div className="flex justify-between border-b border-dashed border-gray-300 pb-2">
+                                                <dt className="font-bold">初穂料目安</dt>
+                                                <dd>八〇,〇〇〇円</dd>
+                                            </div>
+                                        </dl>
+                                    </div>
+
+                                    <CollapsibleDescription>
+                                        <p>
+                                            しょうじが龍神と接続し、あなたに必要な「言霊（真言）」を授かります。<br />
+                                            毎日唱えることで龍神との繋がりが深まり、潜在意識が書き換わり、運命の流れが整います。
+                                        </p>
+                                    </CollapsibleDescription>
+                                    <div className="mt-6 md:mt-8 text-right">
+                                        <a href="#line" className="inline-block text-dragon-cyan font-bold border-b border-dragon-cyan hover:bg-dragon-cyan/5 transition-colors px-2 py-1 text-sm md:text-base">申し込む →</a>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <div className="kasumi-divider"></div>
+
+                            {/* 04 祈祷 */}
+                            <article ref={addToRefs} className="flex flex-col md:flex-row-reverse gap-6 md:gap-12 opacity-0">
+                                <div className="md:w-1/2">
+                                    <SectionPhoto src="https://i.ibb.co/PsTB0Sbx/image.png" alt="龍神祈祷" />
+                                </div>
+                                <div className="md:w-1/2 flex flex-col justify-center">
+                                    <div className="flex items-center gap-3 mb-3 md:mb-4 mt-2 md:mt-0">
+                                        <span className="text-dragon-cyan font-calligraphy text-3xl md:text-4xl opacity-40">四</span>
+                                        <h4 className="text-lg md:text-2xl font-bold font-calligraphy border-l-4 border-dragon-cyan pl-3 md:pl-4 py-1">
+                                            龍神接続・浄化祈祷
+                                        </h4>
+                                    </div>
+                                    <p className="text-shrine-gray text-sm leading-relaxed mb-5 md:mb-6">
+                                        しょうじが龍神と接続し、<br className="hidden md:block" />あなたの波動を調整・浄化いたします。
+                                    </p>
+
+                                    <div className="bg-white/50 p-5 md:p-6 border border-dragon-cyan/20 mb-5 md:mb-6 rounded-sm">
+                                        <dl className="space-y-3 text-sm">
+                                            <div className="flex justify-between border-b border-dashed border-gray-300 pb-2">
+                                                <dt className="font-bold">初穂料目安</dt>
+                                                <dd>六〇,〇〇〇円</dd>
+                                            </div>
+                                        </dl>
+                                    </div>
+
+                                    <CollapsibleDescription>
+                                        <p>
+                                            しょうじが龍神と接続し、あなたに纏わる不要なエネルギーを浄化します。<br />
+                                            龍神の力により波動が整い、心に静けさが戻ります。動画付きは追加奉納で承ります。
+                                        </p>
+                                    </CollapsibleDescription>
+                                    <div className="mt-6 md:mt-8 text-right">
+                                        <a href="#line" className="inline-block text-dragon-cyan font-bold border-b border-dragon-cyan hover:bg-dragon-cyan/5 transition-colors px-2 py-1 text-sm md:text-base">申し込む →</a>
+                                    </div>
+                                </div>
+                            </article>
+
+                            {/* LINE CTA */}
+                            <div id="line" ref={addToRefs} className="opacity-0 translate-y-8 mt-16 md:mt-20">
+                                <div className="shrine-border p-8 md:p-16 text-center relative overflow-hidden">
+                                    <div className="relative z-10">
+                                        <h3 className="text-xl md:text-3xl font-bold font-calligraphy mb-4 md:mb-6">
+                                            <span className="dragon-text-effect">お申し込み・お問い合わせ</span>
+                                        </h3>
+                                        <p className="text-sm md:text-base leading-loose mb-8 md:mb-10 text-shrine-gray">
+                                            龍神接続のお申し込みは、<br className="md:hidden" />公式LINEにて承ります。<br />
+                                            ご希望のメニュー名を添えて、<br className="md:hidden" />静かに一言お送りください。
+                                        </p>
+
+                                        <a
+                                            href="https://lin.ee/LB2rF3Z"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center justify-center gap-3 w-full md:w-auto px-8 md:px-10 py-4 md:py-5 bg-gradient-to-r from-dragon-blue to-ocean-teal text-white hover:from-ocean-teal hover:to-dragon-blue transition-all shadow-lg rounded-sm"
+                                        >
+                                            <span className="tracking-widest font-bold text-base md:text-lg">公式LINEへ</span>
+                                            <span className="text-sm">→</span>
+                                        </a>
+
+                                        <p className="mt-6 md:mt-8 text-[10px] md:text-xs text-dragon-cyan tracking-widest">OFFICIAL LINE ACCOUNT</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </section>
+
+                        {/* --- Footer --- */}
+                        <footer className="py-16 md:py-20 bg-gradient-to-b from-dragon-blue to-shrine-dark text-shrine-paper text-center relative z-10">
+                            <div className="flex flex-col items-center justify-center space-y-6 md:space-y-8">
+                                <div className="w-[1px] h-12 md:h-16 bg-dragon-cyan opacity-30"></div>
+                                <div className="font-calligraphy text-xl md:text-2xl tracking-[0.2em]">
+                                    <span className="dragon-text-effect">龍神接続</span>
+                                </div>
+                                <p className="text-[10px] md:text-xs font-serif tracking-widest opacity-60 leading-loose">
+                                    龍神との繋がりが<br />
+                                    あなたを導く
+                                </p>
+                                <div className="text-[10px] tracking-widest opacity-30 pt-6">
+                                    © Shoji Dragon God Reading.
+                                </div>
+                            </div>
+                        </footer>
+
+                    </div>
+                </React.Fragment>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    </script>
 </body>
+
 </html>
